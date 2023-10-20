@@ -18,13 +18,13 @@ window.addEventListener("scroll", function () {
     window.location.replace("./login.html");
   }
 
-  function acessarCadastro() {
-    window.location.replace("./cadastro.html");
+  function acessarContato() {
+    window.location.replace("./contato.html");
   }
 
 
-  function acessarCadastroDiretorio() {
-    window.location.replace("./pages/cadastro.html");
+  function acessarContatoDiretorio() {
+    window.location.replace("./pages/contato.html");
   }  
   
   function acessarLoginDiretorio() {
