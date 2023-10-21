@@ -4,6 +4,14 @@
 @import url("./footer.css");
 @import url("./form.css");
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+}
+
 ul {
     list-style: none;
 }
@@ -13,12 +21,8 @@ a {
     color: black;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-    scroll-behavior: smooth;
+body {
+    overflow-x: hidden;
 }
 
 .container {
@@ -39,7 +43,7 @@ a {
     font-weight: 700;
 }
 
- p {
+p {
     color: #000;
     font-size: 18px;
     font-style: normal;
