@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.void {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+}
+
+header {
+  position: relative;
+  width: 100%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(3px);
+}
+
+header .logo {
+  position: relative;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .logo a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+}
+
+header .logo img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+header .links {
+  position: relative;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+header .links a {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  text-align: center;
+  text-transform: capitalize;
+  animation: all .2s ease-in-out;
+  font-family: Montserrat;
+  font-weight: 400;
+}
+
+header .links a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: black;
+  animation: all .2s ease-in-out;
+}
+
+header .links a:hover::after {
+  width: 100%;
+}
+
+header .options {
+  position: relative;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+header .options .icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease-in-out;
+}
+
+header .options .icon:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+header .options .icon img {
+  position: relative;
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+header .options .icon a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+header .options .ajuda {
+
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: help;
+}
+
+header .hb-menu {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 38px;
+  height: 28px;
+  cursor: pointer;
+}
+
+header .hb-menu .line {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background-color: black;
+}
+
+.help-screen {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.help-screen.visible {
+  display: flex;
+}
+
+.help-screen .help-window {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgb(240, 240, 230);
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  z-index: 12;
+}
+
+.help-screen .help-window .window-top {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.help-screen .help-window .window-top .close {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  background: rgb(210, 210, 210);
+  box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.help-screen .help-window .window-top .close:hover {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.help-screen .help-window .help-info {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.help-screen .help-window .help-info li {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-screen .help-window .help-info li img {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.menu-mobile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background: white;
+  padding: 0 10px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  z-index: 98;
+}
+
+.menu-mobile.visible {
+  display: flex;
+}
+
+.menu-mobile .icons {
+  list-style: none;
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.menu-mobile .icons li {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease-in-out;
+}
+
+.menu-mobile .icons li img {
+  position: relative;
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+.menu-mobile a {
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-size: 22px;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+  color: black;
+  font-size: 14px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  header .links {
+    display: none;
+  }
+
+  header .options {
+    display: none;
+  }
+
+  header .hb-menu {
+    display: flex;
+  }
+
+ }

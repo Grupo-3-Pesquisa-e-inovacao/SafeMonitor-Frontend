@@ -1,0 +1,331 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* parte de configuração dos tamanhos e cores, etc */
+.container_geral{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    background-image: url(../../assets/gradiente_inicio.png);
+}
+
+.div_dashboard_geral{
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(3px);
+}
+
+.container_fotter{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 50px 0 ;
+}
+
+.div_futter{
+    width: 80%;
+    height: 30px;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: space-between;
+}
+/* fim da parte de configuração dos tamanhos e cores, etc */
+
+
+
+
+
+/* itens da dashboard geral */
+.titulo_filtro{
+    display: flex;
+    width: 100%;
+    gap:75%;
+    padding: 3% 4% 0 4%;
+}
+
+.item_primeira_div_txt{
+    width: 50%;
+    height: 53px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item_primeira_div_txt p{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.item_primeira_div_txt span{
+    color: #919293;
+    display: flex;
+    font-size: medium;
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+.item_primeira_div{
+    width: 10%;
+    height: 40px;
+    display: flex;
+}
+
+.item_primeira_div img{
+    size: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.dashs1{
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    padding: 3% 0 1% 0;
+}
+
+#myLineChart {
+    display: flex;
+    align-items: center;
+} 
+
+.dashboard_geral1{
+    width: 60%;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.alerta_notes{
+    width: 30%;
+    height: 300px;
+    padding: 0 20px 2% 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.alerta_notes p{
+    font-size: small;
+}
+
+.localizacao_alerta{
+    font-size: small;
+    display: flex;
+    width: 100%;
+}
+
+#nomeInfoAlerta{
+    display: flex;
+    justify-content: center;
+    width: 20%;
+
+}
+#nomeInfoID{
+    display: flex;
+    justify-content: center;
+    width: 13%;
+}
+
+#nomeInfoStatus{
+    width: 64%;
+}
+.alerta1 img{
+    width: 30px;
+    height: 30px;
+}
+
+.alerta1{
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.alerta2 img{
+    width: 30px;
+    height: 30px;
+}
+
+.alerta2{
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.alerta3 img{
+    width: 30px;
+    height: 30px;
+}
+
+.alerta3{
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.titulo_alerta{
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.ver_outros{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dashs2{
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    padding: 0 0 3% 0;
+}
+
+#myDoughnutChart{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+} 
+
+.legendas{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2% 2% 2% 2%;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    padding: 23px;
+    font-size: 14px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 5px;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.dash_bola{
+    width: 22%;
+    height: 300px;
+    padding: 0 0 2% 0;
+    border-radius: 10px;
+}
+
+.dash_bola {
+    position: relative;
+    display: inline-block;
+}
+
+.dash_bola .tooltip {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: -20%; /* Posicione no centro vertical */
+    left: 118%; /* Posicione no lado direito */
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.dash_bola:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dash_bola img {
+    width: 20px;
+    height: auto;
+    margin-left: 5px;
+    cursor: help;
+}
+
+ .dash_bola p{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding: 2% 2% 0% 2%;
+} 
+
+.legendas{
+    width: 21%;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.dash_barra_de_lado{    
+    width: 45%;
+    height: 300px;
+    padding: 0 0 2% 0;
+    border-radius: 10px;
+}
+
+.dash_barra_de_lado {
+    position: relative;
+    display: inline-block;
+}
+
+.dash_barra_de_lado .tooltip {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: -20%; /* Posicione no centro vertical */
+    left: 90%; /* Posicione no lado direito */
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.dash_barra_de_lado:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dash_barra_de_lado h3{
+    color: #919293;
+    display: flex;
+    font-size: medium;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+.dash_barra_de_lado p{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+/* fim dos itens da dashboard geral */

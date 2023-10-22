@@ -1,0 +1,438 @@
+.conteudoSite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 120vh;
+
+}
+
+.conteudoSite canvas {
+    width: 0;
+    height: 0;
+
+}
+
+.containerBlocoGrafico {
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    height: 100%;
+}
+
+.blocoGrandeVertical {
+    width: 25%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+
+}
+
+.blocoTodosGraficos{
+    width: 70%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.conteudoblocoGrandeVertical {
+    width: 90%;
+    height: 95%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+
+.icone-computador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    border-radius: 10px;
+}
+
+
+
+.icone-computador img {
+    width: 100%;
+    height: 100%;
+}
+
+.info-computador {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
+}
+
+.iconeGrandeAlerta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 30%;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.iconeGrandeAlerta img{
+    width: 100%;
+    height: 80%;
+}
+
+
+.iconeGrandeAlerta span {
+    font-size: 25px;
+    font-weight: bold;
+    color: red;
+}
+
+.blocoInfoAlerta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 60%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.informacoesAlerta{
+    width: 95%;
+    height: 50%;
+    border-bottom: 1px black solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.icones-e-alertas{
+    width: 95%;
+    height: 50%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.bloco-com-3-alertas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 60%;
+}
+
+.bloco-com-2-alertas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+}
+
+#componente{
+    font-weight: bold;
+}
+
+#valores{
+    color: red;
+    font-weight: bold;
+}
+
+#icones-e-alertas img{
+width: 25px;
+height: 25px;
+}
+
+.nome-id-computador{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 9%;
+}
+
+#nome-sala-computador{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#id-computador{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.wifi-disco{
+    width: 100%;
+    height: 29%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-bloco{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 49%;
+    height: 100%;
+    
+
+}
+
+
+.bloco-wifi{
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.bloco-disco{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#meuGraficoDisco{
+    width: 49%;
+    height: 100%;
+
+}
+
+#meuGraficoRam{
+    width: 100%;
+    height: 100%;
+}
+
+#meuGraficoCPU{
+    height: 100%;
+}
+
+#meuGraficoWifi{
+    height: 100%;
+}
+.InfoGrafico{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 49%; 
+}
+
+.separacaoInformacoes{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.corLegendaVerde{
+    width: 15%;
+    height: 20%;
+    background-color: green;
+    border-radius: 20px;
+}
+
+.corLegendaVermelha{
+    width: 15%;
+    height: 20%;
+    background-color: red;
+    border-radius: 20px;
+}
+
+.legenda{
+    width: 80%;
+}
+
+#titulo-componente{
+    display: flex;
+    width: 90%;
+    font-weight: bold;
+}
+
+.tituloStatus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 15%;
+    font-weight: bold;
+    background-color: rgb(192, 192, 192);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: medium;
+}
+
+.status{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 85%;
+    justify-content: center;
+}
+
+.ram-historico-cpu{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 59%;
+}
+
+.ram-cpu{
+display: flex;
+flex-direction: column;
+height: 100%;
+width: 49%;
+}
+
+.historico{
+display: flex;
+height: 100%;
+width: 49%;
+}
+
+.container-bloco-ram-cpu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bloco-ram{
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.bloco-cpu{
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.container-bloco-historico{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bloco-histórico{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: small;
+}
+
+.dicaConteudo{
+    display: flex;
+    width: 100%;
+    height: 5%;
+    font-weight: bold;
+    background-color: rgba(211, 211, 211, 0.637);
+    border-radius: 10px;
+    font-size: small;
+}
+
+.dicaApp{
+    display: flex;
+    justify-content: center;
+    width: 15%;
+}
+
+.dicaInstancia{
+    display: flex;
+    justify-content: center;
+    width:50%;
+}
+
+.dicaDtRegistro{
+    display: flex;
+    justify-content: center;
+    width: 40%;
+}
+
+
+
+.conteudoSites{
+    width: 100%;
+    height: 93%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.instancias{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
+
+.iconApp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+}
+
+.iconApp img {
+    width: 50%;
+    height: 50%;
+}
+
+.instancia{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.dtRegistro{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+
+}

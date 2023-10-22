@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salas | dashboard</title>
+    <link rel="stylesheet" href="../../css/dashboard/visao_salas.css">
+    <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
+</head>
+
+<body>
+    <!-- Inicio dos itens da header -->
+    <div class="help-screen" id="help-screen">
+        <div class="help-window">
+            <div class="window-top">
+                <div class="close" onclick="showHelp()">
+                    X
+                </div>
+            </div>
+
+            <ul class="help-info">
+                <li>Lista de alertas</li>
+                <li><img src="../../assets/assets-dashboard/dangerous.svg" alt="">
+                    <p> - Alerta critico</p>
+                </li>
+                <li><img src="../../assets/assets-dashboard/alert-amarelo.svg" alt="">
+                    <p> - Alerta atenção</p>
+                </li>
+                <li><img src="../../assets/assets-dashboard/alert-verde.svg" alt="">
+                    <p> - Alerta OK</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu-mobile" id="menu-mobile">
+        <ul class="icons">
+            <li onclick="showHelp()">?</li>
+            <li><img src="../../assets/assets-dashboard/cog.png" alt=""><a href="dashboard_configuracoes.html"></a></li>
+            <li><img src="../../assets/assets-dashboard/user.png" alt=""><a href=""></a></li>
+        </ul>
+        <a href="">Inicio</a>
+        <a href="">Dash geral</a>
+        <a href="">Salas</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="../../assets/logo/logo_horizontal.png" alt="">
+            <a href="./dashboard_geral.html"></a>
+        </div>
+        <div class="links">
+            <a href="./dashboard_geral.html">Visão Geral</a>
+            <a href="./dashboard_visao_salas.html">Visão Salas</a>
+        </div>
+
+        <div class="options">
+            <div class="icon ajuda" onclick="showHelp()">
+                ?
+            </div>
+            <div class="icon">
+                <img src="../../assets/assets-dashboard/cog.png" alt="">
+                <a href="./dashboard_configuracoes.html"></a>
+            </div>
+            <div class="icon">
+                <img src="../../assets/assets-dashboard/user.png" alt="">
+            </div>
+        </div>
+
+        <div class="hb-menu" onclick="showMenu()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+    <!-- Fim dos itens da header -->
+
+    <div id="ConteudoSite">
+
+        <div id="modal" class="modal">
+            <div class="tituloModal">
+                Adicione sua sala
+            </div>
+            <div class="conteudoModal">
+
+
+                <div class="form">
+                    <div class="conteudoForm">
+                        <div class="nomeDaSala">
+                            Nome da sala:
+                        </div>
+                        <div class="inputNomeSala">
+                            <input type="text" name="" id="inputNomeSala">
+                        </div>
+
+                        <div class="nomeDaSala">
+                            Localização:
+                        </div>
+                        <div class="inputNomeSala">
+                            <input type="text" name="" id="localizacao">
+                        </div>
+
+                        <div class="divButtonAddSala">
+                            <button class="buttonAddSala" onclick="adicionarSala()">
+                                Adicionar Sala
+                            </button>
+
+                            <button class="buttonCancelarAddSala" onclick="fecharModal()">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="containerSalas" id="containerSalas">
+            <div class="titulo-menuFiltros">
+                <div class="titulo">
+                    Salas
+                </div>
+                <div class="menuFiltros">
+                    <img id="menuHamburguer" src="../../assets/assets-dashboard/menu-fill.svg" alt="">
+                </div>
+            </div>
+
+            <div class="miniContainerSalas" id="miniContainerSalas">
+                <div class="salas">
+                    <a href="./dashboard_computadores_sala.html">
+                        <div class="nomeSala">Lab. Informática</div>
+                        <div class="infoSala">
+                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala:</span> 0874</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> Subsolo 01</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 50</span>
+                            </div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
+                            38</div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
+                            12</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="salas">
+                    <a href="./dashboard_computadores_sala.html">
+                        <div class="nomeSala">Sala de aula</div>
+                        <div class="infoSala">
+                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala: </span>0458</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> 6° Andar</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 15</span>
+                            </div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
+                            5</div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
+                            10</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="salas">
+                    <a href="./dashboard_computadores_sala.html">
+                        <div class="nomeSala">Sala de aula</div>
+                        <div class="infoSala">
+                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala:</span> 0784</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> Subsolo 02</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 27</span>
+                            </div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
+                            18</div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
+                            9</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="salas">
+                    <a href="./dashboard_computadores_sala.html">
+                        <div class="nomeSala">Lab. Informática</div>
+                        <div class="infoSala">
+                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala:</span> 0438</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> 3° Andar</div>
+                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 5</span>
+                            </div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
+                            5</div>
+                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
+                            0</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="addSala">
+                <div class="divDentroAddSala">
+                    <a href="javascript:void(0);" onclick="abrirModal()">
+                        <img id="iconeDeMais" src="../../assets/assets-dashboard/plus.svg">
+                        <div class="mensagem">Adicionar Sala</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <p>Safe Monitor - 2023 - Todos direitos reservados</p>
+    </footer>
+</body>
+
+</html>
+<script src="../../js/visao_salas.js"></script>
+
+<script>
+    let helpScreen = document.getElementById("help-screen")
+    let menuMobile = document.getElementById("menu-mobile")
+
+    function showHelp() {
+        helpScreen.classList.toggle("visible")
+    }
+
+    function showMenu() {
+        menuMobile.classList.toggle("visible")
+    }
+</script>

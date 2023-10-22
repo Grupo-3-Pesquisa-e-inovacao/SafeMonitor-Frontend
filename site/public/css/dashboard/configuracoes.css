@@ -1,0 +1,77 @@
+.config {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.config-alerta {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;   
+}
+
+.config-alerta ul {
+    list-style: none;
+    position: relative;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.config-alerta ul li {
+    position: relative;
+    width: 100%;
+    height: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.config-alerta ul li input {
+    position: relative;
+    width: 60%;
+    height: 10px;
+    outline: none;
+} 
+
+.config-alerta ul li input::before {
+    content: '1%';
+    position: absolute;
+    left: 0;
+    top: -20px;
+    color: gray;
+    font-size: 10px;
+}
+
+.config-alerta ul li input::after {
+    content: '100%';
+    position: absolute;
+    right: 0;
+    top: -20px;
+    color: gray;
+    font-size: 10px;
+}
+
+.config-alerta ul li input::-webkit-scrollbar-button {
+    background-color: black;
+}
+
+.config-alerta ul li input::-webkit-meter-bar {
+    background-color: #109A68;
+}
+
+.config-alerta ul li input::-webkit-progress-inner-element {
+    background-color: #109A68;
+}
