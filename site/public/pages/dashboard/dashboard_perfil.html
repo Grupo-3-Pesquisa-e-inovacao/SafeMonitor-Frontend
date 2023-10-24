@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações | Dashboard - SafeMonitor</title>
+    <title>Perfil | Dashboard - SafeMonitor</title>
+    <link rel="stylesheet" href="../../css/dashboard/perfil.css">
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
-    <link rel="stylesheet" href="../../css/dashboard/configuracoes.css">
 </head>
 <body>
     <!-- Inicio dos itens da header -->
@@ -19,7 +19,7 @@
 
             <ul class="help-info">
                 <li>Lista de alertas</li>
-                <li><img src="../../assets/assets-dashboard/dangerous.svg" alt="">
+                <li><img src="../../assets/assets-dashboard/alert-amarelo.svg" alt="">
                     <p> - Alerta critico</p>
                 </li>
                 <li><img src="../../assets/assets-dashboard/alert-amarelo.svg" alt="">
@@ -35,8 +35,12 @@
     <div class="menu-mobile" id="menu-mobile">
         <ul class="icons">
             <li onclick="showHelp()">?</li>
-            <li><img src="../../assets/assets-dashboard/cog.png" alt=""><a href="dashboard_configuracoes.html"></a></li>
-            <li><img src="../../assets/assets-dashboard/user.png" alt=""><a href="./dashboard_perfil.html"></a></li>
+            <li><img src="../../assets/assets-dashboard/cog.png" alt="">
+                <a href="./dashboard_configuracoes.html"></a>
+            </li>
+            <li><img src="../../assets/assets-dashboard/user.png" alt="">
+                <a href="./dashboard_perfil.html"></a>
+            </li>
         </ul>
         <a href="">Inicio</a>
         <a href="">Dash geral</a>
@@ -75,54 +79,43 @@
     </header>
     <!-- Fim dos itens da header -->
 
-    <div class="config">
-        <div class="config-alerta">
-            <h1>Quando emitir um alerta amarelo?</h1>
-            <ul>
-                <li>
-                    <label for="cpu">CPU</label>
-                    <input type="range" id="cpu" name="cpu" min="1" max="100">
-                </li>
-                <li>
-                    <label for="ram">Meoria RAM</label>
-                    <input type="range" id="ram" name="ram" min="1" max="100">
-                </li>
-                <li>
-                    <label for="disco">Disco</label>
-                    <input type="range" id="disco" name="disco" min="1" max="100">
-                </li>
-                <li>
-                    <label for="rede">Rede</label>
-                    <input type="range" id="rede" name="rede" min="1" max="100">
-                </li>
-            </ul>
-        </div>
-        <div class="config-alerta">
-            <h1>Quando emitir um alerta vermelho?</h1>
-            <ul>
-                <li>
-                    <label for="cpu">CPU</label>
-                    <input type="range" id="cpu" name="cpu" min="1" max="100" value="80">
-                </li>
-                <li>
-                    <label for="ram">Meoria RAM</label>
-                    <input type="range" id="ram" name="ram" min="1" max="100" value="80">
-                </li>
-                <li>
-                    <label for="disco">Disco</label>
-                    <input type="range" id="disco" name="disco" min="1" max="100" value="80">
-                </li>
-                <li>
-                    <label for="rede">Rede</label>
-                    <input type="range" id="rede" name="rede" min="1" max="100" value="80">
-                </li>
-            </ul>
+    <div class="profile">
+        <div class="container">
+            <div class="general">
+                <img src="../../assets/assets-dashboard/sptech.png" alt="">
+                <div class="item">
+                    <h1>nome usuario</h1>
+                    <p>usuario@safemonitor.com</p>
+                </div>
+                <div class="item">
+                    <h1>nome instituição</h1>
+                    <p>São Paulo Tech School</p>
+                </div>
+            </div>
+
+            <div class="specific">
+                <div class="item">
+                    <h1>endereço</h1>
+                    <p>Rua Haddock Lobos</p>
+                </div>
+                <div class="item">
+                    <h1>email associado</h1>
+                    <p>admin@sptech.school</p>
+                </div>
+                <div class="item">
+                    <h1>numero de salas cadastradas</h1>
+                    <p>10</p>
+                </div>
+                <div class="item">
+                    <h1>numer de maquinas cadastradas</h1>
+                    <p>230</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer>
         <p>Safe Monitor - 2023 - Todos direitos reservados</p>
     </footer>
-    
 </body>
 </html>
