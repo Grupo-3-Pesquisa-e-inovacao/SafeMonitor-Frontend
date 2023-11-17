@@ -24,23 +24,25 @@ function validarLogin() {
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.idUsuario;
-                sessionStorage.ID_EMPRESA = json.fk_empresa;
+                sessionStorage.ID_EMPRESA = json.fk_empresa;.
+
+                if(resposta.length > 0){
+                    setTimeout(function () {
+                        window.location = "../pages/dashboard/dashboard_geral.html";
+                    }, 1000); // apenas para exibir o loading
+    
+                }
             
+               
+                console.log("deu certo")
 
-                // setTimeout(function () {
-                //     window.location = "./dashboard/cards.html";
-                // }, 1000); // apenas para exibir o loading
-
+               
             });
 
         } else {
 
             console.log("Houve um erro ao tentar realizar o login!");
 
-            // resposta.text().then(texto => {
-            //     console.error(texto);
-            //     finalizarAguardar(texto);
-            // });
         }
 
     }).catch(function (erro) {
