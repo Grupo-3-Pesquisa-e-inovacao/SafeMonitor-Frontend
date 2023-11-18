@@ -18,6 +18,7 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
+                        res.json(resultadoAutenticar[0]);
                     }
                 }
             ).catch(
