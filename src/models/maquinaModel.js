@@ -1,7 +1,6 @@
 var database = require("../database/config")
 
 function cadastrar(nome, modelo, numeroSerie, marca, idEmpresa, idSala) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar(): ")
     var instrucao = `
     INSERT INTO maquina (nome, modelo, numero_serie, marca, fk_empresa, fk_sala)
 	    VALUE("${nome}", "${modelo}", "${numeroSerie}", "${marca}", ${idEmpresa}, ${idSala});

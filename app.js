@@ -22,7 +22,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/maquina", maquinaRouter);
-app.use("/sala", maquinaRouter);
+app.use("/pages/dashboard/sala", salaRouter);
 
 
 

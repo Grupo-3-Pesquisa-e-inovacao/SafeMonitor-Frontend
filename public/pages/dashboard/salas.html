@@ -7,9 +7,12 @@
     <title>Salas | Dashboard - SafeMonitor</title>
     <link rel="stylesheet" href="../../css/dashboard/visao_salas.css">
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
+    <script src="../../api/salas.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
-<body>
+<body onload="listarSala()">
     <!-- Inicio dos itens da header -->
     <div class="help-screen" id="help-screen">
         <div class="help-window">
@@ -80,12 +83,10 @@
     <div id="ConteudoSite">
 
         <div id="modal" class="modal">
-            <div class="tituloModal">
+            <div class="tituloModal" id="tituloModal">
                 Adicione sua sala
             </div>
             <div class="conteudoModal">
-
-
                 <div class="form">
                     <div class="conteudoForm">
                         <div class="nomeDaSala">
@@ -102,8 +103,8 @@
                             <input type="text" name="" id="localizacao">
                         </div>
 
-                        <div class="divButtonAddSala">
-                            <button class="buttonAddSala" onclick="adicionarSala()">
+                        <div class="divButtonAddSala" id="buttonsModal">
+                            <button class="buttonAddSala" id="buttonAdd" onclick="adicionarSala()">
                                 Adicionar Sala
                             </button>
 
@@ -126,76 +127,15 @@
             </div>
 
             <div class="miniContainerSalas" id="miniContainerSalas">
-                <div class="salas">
-                    <a href="./dashboard_computadores_sala.html">
-                        <div class="nomeSala">Lab. Informática - 01</div>
-                        <div class="infoSala">
-                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala:</span> 0874</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> Subsolo 01</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 50</span>
-                            </div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
-                            38</div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
-                            12</div>
-                        </div>
-                    </a>
-                </div>
+            
 
-                <div class="salas">
-                    <a href="./dashboard_computadores_sala.html">
-                        <div class="nomeSala">Sala de aula - 01</div>
-                        <div class="infoSala">
-                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala: </span>0458</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> 6° Andar</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 15</span>
-                            </div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
-                            5</div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
-                            10</div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="salas">
-                    <a href="./dashboard_computadores_sala.html">
-                        <div class="nomeSala">Sala de aula - 02</div>
-                        <div class="infoSala">
-                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala:</span> 0784</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> Subsolo 02</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 27</span>
-                            </div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
-                            18</div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
-                            9</div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="salas">
-                    <a href="./dashboard_computadores_sala.html">
-                        <div class="nomeSala">Lab. Informática - 02</div>
-                        <div class="infoSala">
-                            <div class="tituloDados"><span style="font-weight: bold;">ID da sala:</span> 0438</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Localização:</span> 3° Andar</div>
-                            <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 5</span>
-                            </div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
-                            5</div>
-                            <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
-                            0</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
             <div class="addSala">
                 <div class="divDentroAddSala">
                     <a href="javascript:void(0);" onclick="abrirModal()">
                         <img id="iconeDeMais" src="../../assets/assets-dashboard/plus.svg">
                         <div class="mensagem">Adicionar Sala</div>
+
                     </a>
                 </div>
             </div>
@@ -209,9 +149,11 @@
 </body>
 
 </html>
-<script src="../../js/visao_salas.js"></script>
+
 
 <script>
+    
+
     let helpScreen = document.getElementById("help-screen")
     let menuMobile = document.getElementById("menu-mobile")
 

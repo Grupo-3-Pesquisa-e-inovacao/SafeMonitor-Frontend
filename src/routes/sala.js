@@ -12,6 +12,10 @@ router.get("/listar/:idEmpresa", function(req, res){
     salaController.listar(req, res);
 })
 
+router.get("/buscarInfoMaquina/:idSala", function(req, res){
+    salaController.buscarInfoMaquinas(req, res)
+})
+
 router.put("/alterar/:idSala", function(req, res){
     salaController.alterar(req, res);
 })
