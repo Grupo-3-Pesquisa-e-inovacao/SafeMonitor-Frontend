@@ -1,4 +1,4 @@
-var usuarioModel = require("../models/maquinaModel");
+var maquinaModel = require("../models/maquinaModel");
 
 
 function cadastrar(req, res) {
@@ -22,7 +22,7 @@ function cadastrar(req, res) {
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, modelo, numeroSerie, marca, idEmpresa, idSala)
+        maquinaModel.cadastrar(nome, modelo, numeroSerie, marca, idEmpresa, idSala)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -40,9 +40,62 @@ function cadastrar(req, res) {
     }
 }
 
-module.exports = {
-    cadastrar,
-    listarPorSala,
-    alterar,
-    deletar
+function listar(req, res) {
+
+    var idSala = req.params.idSala;
+
+    maquinaModel.listar(idSala).then(function (resultado) {
+
+        if (resultado.length > 0) {
+
+            const maquina = resultado[0]
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
+
+function buscarUltimoValor(req, res) {
+
+    var idComponente = req.params.idComponente;
+    var idTipoDados = req.params.idTipoDados;
+    var idMaquina = req.params.idMaquina;
+
+    maquinaModel.capturaUltimoValor(idComponente, idTipoDados, idMaquina).then(function (resultado) {
+
+        if (resultado.length > 0) {
+
+            const maquina = resultado[0]
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+module.exports = {
+    buscarUltimoValor,
+    cadastrar,
+    listar,
+    
+    // alterar,
+    // deletar
+}
+
+
+

@@ -8,8 +8,13 @@ router.post("/cadastrar", function (req, res) {
     maquinaController.cadastrar(req, res);
 })
 
-router.get("/listar/:idEmpresa", function(req, res){
+router.get("/listar/:idSala", function(req, res){
     maquinaController.listar(req, res);
+})
+
+
+router.get("/valor/:idMaquina/:idComponente/:idTipoDados", function(req, res){
+    maquinaController.buscarUltimoValor(req, res);
 })
 
 router.put("/alterar/:idMaquina", function(req, res){

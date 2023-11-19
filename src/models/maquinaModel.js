@@ -10,10 +10,13 @@ function cadastrar(nome, modelo, numeroSerie, marca, idEmpresa, idSala) {
 }
 
 function listar(idSala) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function LISTAR():")
-    var instrucao = `
-    SELECT * FROM maquina WHERE fk_sala = ${idSala} AND fk_empresa = ${idEmpresa};
-    `;
+    var instrucao = `CALL procedure_maquina(${idSala});`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function capturaUltimoValor(idComponente, idTipoDados, idMaquina){
+    var instrucao = `CALL ultimo_valor_captura(${idComponente}, ${idTipoDados}, ${idMaquina});`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -49,5 +52,6 @@ module.exports = {
     cadastrar, 
     alterar, 
     listar, 
-    deletar
+    deletar,
+    capturaUltimoValor
 };

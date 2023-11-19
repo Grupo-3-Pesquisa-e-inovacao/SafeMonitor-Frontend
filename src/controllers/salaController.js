@@ -66,9 +66,8 @@ function alterar(req, res) {
 function listar(req, res) {
 
     var idEmpresa = req.params.idEmpresa;
-    var idSala = req.params.idSala;
 
-    salaModel.listar(idEmpresa, idSala).then(function (resultado) {
+    salaModel.listar(idEmpresa).then(function (resultado) {
 
         if (resultado.length > 0) {
 

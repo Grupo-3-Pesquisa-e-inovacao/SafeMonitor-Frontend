@@ -7,9 +7,10 @@
     <title>Máquinas | Dashboard - SafeMonitor</title>
     <link rel="stylesheet" href="../../css/dashboard/computadores_sala.css">
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
+    <script src="../../api/maquina.js"></script>
 </head>
 
-<body>
+<body onload="listarMaquinaPorSala(sessionStorage.ID_SALA)">
     <!-- Inicio dos itens da header -->
     <div class="help-screen" id="help-screen">
         <div class="help-window">
@@ -92,11 +93,32 @@
                             Nome da máquina:
                         </div>
                         <div class="inputNomeSala">
-                            <input type="text" name="" id="inputNomeSala">
+                            <input type="text" name="" id="nome">
+                        </div>
+
+                        <div class="nomeDaSala">
+                            Modelo:
+                        </div>
+                        <div class="inputNomeSala">
+                            <input type="text" name="" id="modelo">
+                        </div>
+
+                        <div class="nomeDaSala">
+                            Número:
+                        </div>
+                        <div class="inputNomeSala">
+                            <input type="text" name="" id="numeroSerie">
+                        </div>
+
+                        <div class="nomeDaSala">
+                            Marca:
+                        </div>
+                        <div class="inputNomeSala">
+                            <input type="text" name="" id="marca">
                         </div>
 
                         <div class="divButtonAddSala">
-                            <button class="buttonAddSala" onclick="adicionarSala()">
+                            <button class="buttonAddSala" onclick="cadastrarMaquina()">
                                 Adicionar Máquina
                             </button>
 
@@ -113,148 +135,10 @@
 
         <div class="containerSalas" id="containerSalas">
             <div class="titulo-menuFiltros">
-                <div class="titulo">
-                    Máquinas - Sala de aula - 01
-                </div>
+                <div class="titulo" id="nomeSala"></div>
             </div>
 
             <div class="miniContainerSalas" id="miniContainerSalas">
-                <div class="salas">
-                    <a href="./dashboard_computador_expecifico.html">
-                        <div class="nomeSala">DESKTOP-0134ZX</div>
-                        <div class="infopc-infostatus">
-                            <div class="infopc">
-                                <div class="iconePC">
-                                    <img src="../../assets/assets-dashboard/computer.svg" alt="">
-                                </div>
-                                <div class="expecificacoes">
-                                    <div class="tituloDados"><span style="font-weight: bold;">Marca:</span> LENOVO</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">Modelo:</span> P112F</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">SO:</span> Windows</div>
-                                </div>
-                            </div>
-                            <div class="infostatus">
-                                <div class="blocoStatusPc">
-                                    <div class="tituloStatus">STATUS</div>
-                                    <div class="registros">
-                                        <div class="valores">
-                                            <div class="tituloDados" id="cpu"><span style="font-weight: bold;">CPU:</span></div>
-                                            <div class="tituloDados" id="disco"><span style="font-weight: bold;">Disco:</span></div>
-                                            <div class="tituloDados" id="ram"><span style="font-weight: bold;">Ram:</span></div>
-                                            <div class="tituloDados" id="rede"><span style="font-weight: bold;">Rede:</span></div>
-                                        </div>
-                                        <div class="icone">
-                                            <img src="../../assets/assets-dashboard/alert-verde.svg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="salas">
-                    <a href="./dashboard_computador_expecifico.html">
-                        <div class="nomeSala">DESKTOP-MELISSA</div>
-                        <div class="infopc-infostatus">
-                            <div class="infopc">
-                                <div class="iconePC">
-                                    <img src="../../assets/assets-dashboard/computer.svg" alt="">
-                                </div>
-                                <div class="expecificacoes">
-                                    <div class="tituloDados"><span style="font-weight: bold;">Marca:</span> LENOVO</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">Modelo:</span> P112F</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">SO:</span> Windows</div>
-                                </div>
-                            </div>
-                            <div class="infostatus">
-                                <div class="blocoStatusPc">
-                                    <div class="tituloStatus">STATUS</div>
-                                    <div class="registros">
-                                        <div class="valores">
-                                            <div class="tituloDados" id="cpu"><span style="font-weight: bold;">CPU:</span></div>
-                                            <div class="tituloDados" id="disco"><span style="font-weight: bold;">Disco:</span></div>
-                                            <div class="tituloDados" id="ram"><span style="font-weight: bold;">Ram:</span></div>
-                                            <div class="tituloDados" id="rede"><span style="font-weight: bold;">Rede:</span></div>
-                                        </div>
-                                        <div class="icone">
-                                            <img src="../../assets/assets-dashboard/alert-verde.svg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="salas">
-                    <a href="./dashboard_computador_expecifico.html">
-                        <div class="nomeSala">DESKTOP-DOUGLAS</div>
-                        <div class="infopc-infostatus">
-                            <div class="infopc">
-                                <div class="iconePC">
-                                    <img src="../../assets/assets-dashboard/computer.svg" alt="">
-                                </div>
-                                <div class="expecificacoes">
-                                    <div class="tituloDados"><span style="font-weight: bold;">Marca:</span> LENOVO</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">Modelo:</span> P112F</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">SO:</span> Windows</div>
-                                </div>
-                            </div>
-                            <div class="infostatus">
-                                <div class="blocoStatusPc">
-                                    <div class="tituloStatus">STATUS</div>
-                                    <div class="registros">
-                                        <div class="valores">
-                                            <div class="tituloDados" id="cpu"><span style="font-weight: bold;">CPU:</span></div>
-                                            <div class="tituloDados" id="disco"><span style="font-weight: bold;">Disco:</span></div>
-                                            <div class="tituloDados" id="ram"><span style="font-weight: bold;">Ram:</span></div>
-                                            <div class="tituloDados" id="rede"><span style="font-weight: bold;">Rede:</span></div>
-                                        </div>
-                                        <div class="icone">
-                                            <img src="../../assets/assets-dashboard/alert-verde.svg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="salas">
-                    <a href="./dashboard_computador_expecifico.html">
-                        <div class="nomeSala">DESKTOP-ARTHUR</div>
-                        <div class="infopc-infostatus">
-                            <div class="infopc">
-                                <div class="iconePC">
-                                    <img src="../../assets/assets-dashboard/computer.svg" alt="">
-                                </div>
-                                <div class="expecificacoes">
-                                    <div class="tituloDados"><span style="font-weight: bold;">Marca:</span> LENOVO</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">Modelo:</span> P112F</div>
-                                    <div class="tituloDados"><span style="font-weight: bold;">SO:</span> Windows</div>
-                                </div>
-                            </div>
-                            <div class="infostatus">
-                                <div class="blocoStatusPc">
-                                    <div class="tituloStatus">STATUS</div>
-                                    <div class="registros">
-                                        <div class="valores">
-                                            <div class="tituloDados" id="cpu"><span style="font-weight: bold;">CPU:</span></div>
-                                            <div class="tituloDados" id="disco"><span style="font-weight: bold;">Disco:</span></div>
-                                            <div class="tituloDados" id="ram"><span style="font-weight: bold;">Ram:</span></div>
-                                            <div class="tituloDados" id="rede"><span style="font-weight: bold;">Rede:</span></div>
-                                        </div>
-                                        <div class="icone">
-                                            <img src="../../assets/assets-dashboard/alert-verde.svg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
             <div class="addSala">
                 <div class="divDentroAddSala">

@@ -21,7 +21,7 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/maquina", maquinaRouter);
+app.use("/pages/dashboard/maquina", maquinaRouter);
 app.use("/pages/dashboard/sala", salaRouter);
 
 
