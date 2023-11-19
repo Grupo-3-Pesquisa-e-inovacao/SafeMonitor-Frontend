@@ -12,7 +12,6 @@ router.get("/listar/:idSala", function(req, res){
     maquinaController.listar(req, res);
 })
 
-
 router.get("/valor/:idMaquina/:idComponente/:idTipoDados", function(req, res){
     maquinaController.buscarUltimoValor(req, res);
 })

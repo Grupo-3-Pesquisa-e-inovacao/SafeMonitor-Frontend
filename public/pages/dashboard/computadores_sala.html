@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../css/dashboard/computadores_sala.css">
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
     <script src="../../api/maquina.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
 <body onload="listarMaquinaPorSala(sessionStorage.ID_SALA)">
@@ -81,7 +83,7 @@
     <div id="ConteudoSite">
 
         <div id="modal" class="modal">
-            <div class="tituloModal">
+            <div class="tituloModal" id="tituloModal">
                 Adicione uma máquina
             </div>
             <div class="conteudoModal">
@@ -117,7 +119,7 @@
                             <input type="text" name="" id="marca">
                         </div>
 
-                        <div class="divButtonAddSala">
+                        <div class="divButtonAddSala" id="buttonsModal">
                             <button class="buttonAddSala" onclick="cadastrarMaquina()">
                                 Adicionar Máquina
                             </button>

@@ -88,13 +88,56 @@ function buscarUltimoValor(req, res) {
     });
 }
 
+
+function alterar(req, res) {
+   
+    var nome = req.body.nomeServer;
+    var modelo = req.body.modeloServer;
+    var numeroSerie = req.body.numeroSerieServer;
+    var marca = req.body.marcaServer;
+    var idMaquina =  req.params.idMaquina;
+
+    maquinaModel.alterar(nome, modelo, numeroSerie, marca, idMaquina)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    )
+    .catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+
+}
+
+function deletar(req, res) {
+    var idMaquina = req.params.idMaquina;
+
+    maquinaModel.deletar(idMaquina)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
 module.exports = {
     buscarUltimoValor,
     cadastrar,
     listar,
-    
-    // alterar,
-    // deletar
+    alterar,
+    deletar
 }
 
 

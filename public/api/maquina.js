@@ -1,3 +1,32 @@
+function abrirModalEditarMaquina(id, nome, modelo, marca, numero_serie) {
+
+    document.getElementById("nome").value = nome;
+    document.getElementById("modelo").value = modelo;
+    document.getElementById("numeroSerie").value = numero_serie;
+    document.getElementById("marca").value = marca;
+
+    
+
+    var tituloModal = document.getElementById("tituloModal");
+    var buttonsModal = document.getElementById("buttonsModal");
+
+    document.getElementById("containerSalas").style.display = "none";
+    document.getElementById("modal").style.display = "flex"
+
+    tituloModal.innerHTML = `Edite as informações da Máquina`;
+    buttonsModal.innerHTML = `
+        <button class="buttonAddSala" id="buttonAdd" onclick="editarMaquina(${id})">
+            Atualizar
+        </button>
+
+        <button class="buttonCancelarAddSala" onclick="fecharModal()">
+            Cancelar
+        </button>
+    `;
+}
+
+
+
 function cadastrarMaquina() {
 
     const rotaAPI = '/maquina/cadastrar';
@@ -7,7 +36,7 @@ function cadastrarMaquina() {
         numeroSerieServer: document.getElementById("numeroSerie").value,
         marcaServer: document.getElementById("marca").value,
         idEmpresaServer: sessionStorage.ID_EMPRESA,
-        idSalaServer: 3
+        idSalaServer: sessionStorage.ID_SALA
     };
 
     const resposta = fetch(rotaAPI, {
@@ -82,6 +111,7 @@ async function listarMaquinaPorSala(idSala) {
                 var nome = dados[i].nome
                 var modelo = dados[i].modelo
                 var marca = dados[i].marca
+                var numSerie = dados[i].numero_serie
                 var so = dados[i].sistema_operacional
 
 
@@ -94,10 +124,10 @@ async function listarMaquinaPorSala(idSala) {
             
                 var sala = `
                 <div class="salas">
-                <a href="./dashboard_computador_expecifico.html" >
+                <a href="#" >
                     <div class="icons-acoes">
-                        <button onclick="abrirModalEditar(${id}, '${nome}', '${localizacao}')"><i class="bi bi-pencil-square"></i><button>
-                        <button onclick="deletar(${id})"><i class="bi bi-trash3-fill"></i><button>
+                        <button onclick="abrirModalEditarMaquina(${idMaquina}, '${nome}', '${modelo}', '${marca}', '${numSerie}')"><i class="bi bi-pencil-square"></i><button>
+                        <button onclick="deletarMaquina(${idMaquina})"><i class="bi bi-trash3-fill"></i><button>
                     </div>
                     <div class="nomeSala">${nome}</div>
                     <div class="infopc-infostatus">
@@ -162,5 +192,82 @@ async function capturaComponente(maquina, componente, tipoDado, div){
     } catch (erro) {
         console.error('Erro na requisição do uso:', erro);
     }''
+
+}
+
+
+function editarMaquina(id) {
+
+    console.log("entrando no editar");
+
+    const rotaAPI = `/pages/dashboard/maquina/alterar/${id}`;
+    const dados = {
+        nomeServer: document.getElementById("nome").value,
+        modeloServer: document.getElementById("modelo").value,
+        numeroSerieServer: document.getElementById("numeroSerie").value,
+        marcaServer: document.getElementById("marca").value,
+    };
+
+    const resposta = fetch(rotaAPI, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dados),
+    })
+
+    resposta.then(resposta => {
+
+        if (resposta.ok) {
+            fecharModal();
+
+
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+
+    }).catch(erro => {
+        console.error('Erro na requisição:', erro);
+    });
+
+}
+
+
+async function deletarMaquina(idMaquina) {
+
+    const rotaAPI = `/maquina/deletar/${idMaquina}`;
+
+    const resposta = await fetch(rotaAPI, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    console.log(resposta)
+
+    resposta.then(resposta => {
+
+
+        if (resposta.ok) {
+            window.alert("Sala deletada")
+
+            fecharModal();
+
+
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+
+    }).catch(erro => {
+        console.error('Erro na requisição:', erro);
+    });
+
+
+
 
 }
