@@ -70,13 +70,11 @@ function cadastrarMaquina() {
 
 
 function computadoresSalas(idSala) {
-
     sessionStorage.ID_SALA = idSala;
     window.location = "./computadores_sala.html";
-
-
-
 }
+
+
 
 async function listarMaquinaPorSala(idSala) {
 
@@ -91,7 +89,7 @@ async function listarMaquinaPorSala(idSala) {
     
         if (resposta.ok) {
             const dados = await resposta.json();
-
+            console.log(dados)
 
             for (var i = 0; i < dados.length; i++) {
 
@@ -116,15 +114,16 @@ async function listarMaquinaPorSala(idSala) {
 
 
                 capturaComponente(idMaquina, 1, 1, "cpu")
-                capturaComponente(idMaquina, 4, 2, "disco")
-                capturaComponente(idMaquina, 3, 3, "ram")
+                capturaComponente(idMaquina, 2, 1, "ram")
+                capturaComponente(idMaquina, 3, 1, "disco")
+                
 
              
 
             
                 var sala = `
                 <div class="salas">
-                <a href="#" >
+                <a href="javascript:void(0);" onclick="computadoresEspecificos(${idMaquina})" >
                     <div class="icons-acoes">
                         <button onclick="abrirModalEditarMaquina(${idMaquina}, '${nome}', '${modelo}', '${marca}', '${numSerie}')"><i class="bi bi-pencil-square"></i><button>
                         <button onclick="deletarMaquina(${idMaquina})"><i class="bi bi-trash3-fill"></i><button>
@@ -267,7 +266,9 @@ async function deletarMaquina(idMaquina) {
         console.error('Erro na requisição:', erro);
     });
 
+}
 
-
-
+function computadoresEspecificos(idMaquina) {
+    sessionStorage.ID_MAQUINA = idMaquina;
+    window.location = "./maquina.html";
 }

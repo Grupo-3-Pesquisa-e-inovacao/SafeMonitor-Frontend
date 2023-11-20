@@ -15,15 +15,27 @@ function listar(idSala) {
     return database.executar(instrucao);
 }
 
-function capturaUltimoValor(idComponente, idTipoDados, idMaquina){
+function capturaUltimoValor(idComponente, idTipoDados, idMaquina) {
     var instrucao = `CALL ultimo_valor_captura(${idComponente}, ${idTipoDados}, ${idMaquina});`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function graficosComponentes(idComponente, idMaquina, limite) {
+    var instrucao = `CALL graficos_especificos(${idComponente}, ${idMaquina}, ${limite});`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+function infoComponentes(idComponente, idMaquina) {
+    var instrucao = `CALL info_componente(${idComponente}, ${idMaquina});`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 
 function deletar(idMaquina) {
-
     var instrucao = `
        DELETE FROM maquina WHERE idMaquina = ${idMaquina};
     `;
@@ -31,6 +43,15 @@ function deletar(idMaquina) {
     return database.executar(instrucao);
 }
 
+
+function buscarMaquina(idMaquina) {
+
+    var instrucao = `
+    SELECT * FROM maquina WHERE idMaquina = ${idMaquina};
+ `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function alterar(nome, modelo, numeroSerie, marca, idMaquina) {
@@ -43,10 +64,15 @@ function alterar(nome, modelo, numeroSerie, marca, idMaquina) {
     return database.executar(instrucao);
 }
 
+
+
 module.exports = {
-    cadastrar, 
-    alterar, 
-    listar, 
+    cadastrar,
+    alterar,
+    listar,
     deletar,
-    capturaUltimoValor
+    capturaUltimoValor,
+    graficosComponentes,
+    buscarMaquina,
+    infoComponentes
 };

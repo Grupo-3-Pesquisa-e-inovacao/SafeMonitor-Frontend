@@ -63,6 +63,28 @@ function listar(req, res) {
     });
 }
 
+
+function buscarMaquina(req, res) {
+
+    var idMaquina = req.params.idMaquina;
+
+    maquinaModel.buscarMaquina(idMaquina).then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const maquina = resultado[0]
+            console.log(maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function buscarUltimoValor(req, res) {
 
     var idComponente = req.params.idComponente;
@@ -87,6 +109,57 @@ function buscarUltimoValor(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function graficosComponentes(req, res) {
+
+    var idComponente = req.params.idComponente;
+    var idMaquina = req.params.idMaquina;
+    var limite = req.params.limite;
+
+    maquinaModel.graficosComponentes(idComponente, idMaquina, limite).then(function (resultado) {
+
+        if (resultado.length > 0) {
+
+            const maquina = resultado[0]
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function infoComponentes(req, res) {
+
+    var idComponente = req.params.idComponente;
+    var idMaquina = req.params.idMaquina;
+
+
+    maquinaModel.infoComponentes(idComponente, idMaquina).then(function (resultado) {
+
+        if (resultado.length > 0) {
+
+            const maquina = resultado[0]
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 
 function alterar(req, res) {
@@ -132,12 +205,17 @@ function deletar(req, res) {
 }
 
 
+
+
 module.exports = {
     buscarUltimoValor,
     cadastrar,
     listar,
     alterar,
-    deletar
+    deletar,
+    buscarMaquina,
+    graficosComponentes,
+    infoComponentes
 }
 
 

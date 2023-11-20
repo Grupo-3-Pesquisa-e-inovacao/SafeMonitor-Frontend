@@ -12,6 +12,20 @@ router.get("/listar/:idSala", function(req, res){
     maquinaController.listar(req, res);
 })
 
+router.get("/informacoes/:idMaquina", function(req, res){
+    maquinaController.buscarMaquina(req, res);
+})
+
+router.get("/graficos/:idComponente/:idMaquina/:limite", function(req, res){
+    maquinaController.graficosComponentes(req, res);
+})
+
+
+router.get("/componentes/:idComponente/:idMaquina/", function(req, res){
+    maquinaController.infoComponentes(req, res);
+})
+
+
 router.get("/valor/:idMaquina/:idComponente/:idTipoDados", function(req, res){
     maquinaController.buscarUltimoValor(req, res);
 })

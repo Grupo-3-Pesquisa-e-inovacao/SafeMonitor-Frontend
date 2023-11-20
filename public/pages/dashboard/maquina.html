@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
     <link rel="stylesheet" href="../../css/dashboard/computador_expecifico.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="../../js/api/maquina.js"></script>
+    <script src="../../js/api/maquinaEpecifica.js"></script>
 </head>
 
-<body>
+<body onload="atualizacaoMaquina(sessionStorage.ID_MAQUINA)">
     <!-- Inicio dos itens da header -->
     <div class="help-screen" id="help-screen">
         <div class="help-window">
@@ -102,12 +105,12 @@
                             <div class="informacoesAlerta">
                                 <div class="tituloStatus">Status</div>
                                 <div class="status">
-                                    <span id="componente-valores"><span id="componente">CPU:</span><span id="valores">
-                                            90%</span></span>
-                                    <span id="componente-valores"><span id="componente">RAM:</span><span id="valores">
-                                            90%</span></span>
-                                    <span id="componente-valores"><span id="componente">Disco:</span><span id="valores">
-                                            80%</span></span>
+                                    <span id="componente-valores"><span id="componente">CPU: </span><span id="valorCPU">
+                                            </span>%</span>
+                                    <span id="componente-valores"><span id="componente">RAM: </span><span id="valorRAM">
+                                            </span>%</span>
+                                    <span id="componente-valores"><span id="componente">Disco: </span><span id="valorDISCO">
+                                            </span>%</span>
                                     <span id="componente-valores"><span id="componente">Rede:</span><span id="valores">
                                             Sem
                                             conexão</span></span>
@@ -119,18 +122,38 @@
                             <div class="icones-e-alertas">
                                 <div class="tituloStatus">Expecificações</div>
                                 <div class="status">
-                                    <span id="componente-valores"><span id="componente">Marca: </span>LENOVO</span>
-                                    <span id="componente-valores"><span id="componente">Modelo :</span>P211F</span>
-                                    <span id="componente-valores"><span id="componente">SO: </span>Windows</span>
-                                    <span id="componente-valores"><span id="componente">Processador: </span>Ryzen 5
-                                        5600G</span>
-                                    <span id="componente-valores"><span id="componente">Ram: </span>16 GB</span>
-                                    <span id="componente-valores"><span id="componente">Armazenamento: </span>500
-                                        GB</span>
-                                    <span id="componente-valores"><span id="componente">N° de série:
-                                        </span>L174BNA03</span>
-                                    <span id="componente-valores"><span id="componente">End. IPV4:
-                                        </span>172.162.43.20</span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Marca: </span>
+                                        <span  id="marca"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Modelo :</span>
+                                        <span  id="modelo"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">SO: </span>
+                                        <span  id="so"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Processador: </span>
+                                        <span  id="processador"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Ram: </span>
+                                        <span id="totalRam"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Armazenamento: </span>
+                                        <span id="totalDisco"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">N° de série:</span>
+                                        <span id="numSerie"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">End. IPV4:</span>
+                                        <span id="ipv4"></span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -238,8 +261,7 @@
 
                                     <div class="instancias">
                                         <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/figma 1.svg"
-                                                alt="">
+                                            <img src="../../assets/assets-dashboard/icons-historico/figma 1.svg" alt="">
                                         </div>
 
                                         <div class="instancia">File | Wireframe-e-Site</div>
@@ -248,11 +270,11 @@
 
                                     <div class="instancias">
                                         <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/Group.svg"
-                                                alt="">
+                                            <img src="../../assets/assets-dashboard/icons-historico/Group.svg" alt="">
                                         </div>
 
-                                        <div class="instancia" style="color: red; font-weight: bold;">Instagram * Bate-Papo</div>
+                                        <div class="instancia" style="color: red; font-weight: bold;">Instagram *
+                                            Bate-Papo</div>
                                         <div class="dtRegistro">20/09/2023 | 13:58:19</div>
                                     </div>
 
@@ -322,7 +344,7 @@
 
 </html>
 
-<script src="../../js/computador_expecifico.js"></script>
+<script src="../../js/computadorEspecifico.js"></script>
 
 <script>
     let helpScreen = document.getElementById("help-screen")
