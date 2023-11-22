@@ -34,6 +34,18 @@ function infoComponentes(idComponente, idMaquina) {
     return database.executar(instrucao);
 }
 
+function fecharJanela(idJanela){
+    var instrucao = `UPDATE janela SET matar = 1 WHERE idJanela = ${idJanela}`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function listarJanela(idMaquina){
+    var instrucao = `SELECT * FROM janela WHERE fk_maquina = ${idMaquina} AND stt = 'Aberta';`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 
 function deletar(idMaquina) {
     var instrucao = `
@@ -74,5 +86,7 @@ module.exports = {
     capturaUltimoValor,
     graficosComponentes,
     buscarMaquina,
-    infoComponentes
+    infoComponentes,
+    listarJanela,
+    fecharJanela
 };

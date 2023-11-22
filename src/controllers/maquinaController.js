@@ -85,6 +85,49 @@ function buscarMaquina(req, res) {
     });
 }
 
+function fecharJanela(req, res) {
+
+    var idJanela = req.params.idJanela;;
+
+    maquinaModel.fecharJanela(idJanela).then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const maquina = resultado[0]
+            console.log(maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function listarJanela(req, res) {
+
+    var idMaquina = req.params.idMaquina;;
+
+    maquinaModel.listarJanela(idMaquina).then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const janela = resultado
+            console.log(janela);
+            res.json(janela);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function buscarUltimoValor(req, res) {
 
     var idComponente = req.params.idComponente;
@@ -215,7 +258,9 @@ module.exports = {
     deletar,
     buscarMaquina,
     graficosComponentes,
-    infoComponentes
+    infoComponentes,
+    listarJanela,
+    fecharJanela
 }
 
 

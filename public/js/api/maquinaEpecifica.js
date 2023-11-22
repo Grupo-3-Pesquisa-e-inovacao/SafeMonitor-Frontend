@@ -14,11 +14,12 @@ async function buscarInfoMaquina(idMaquina){
         document.getElementById("marca").innerHTML = dados.marca
         document.getElementById("modelo").innerHTML = dados.modelo
         document.getElementById("so").innerHTML = dados.sistema_operacional
-        document.getElementById("processador").innerHTML = dados.arquitetura
-        document.getElementById("totalRam").innerHTML = dados.arquitetura
-        document.getElementById("totalDisco").innerHTML = dados.arquitetura
+        document.getElementById("arquitetura").innerHTML = dados.arquitetura
+        document.getElementById("fabricante").innerHTML = dados.fabricante
         document.getElementById("numSerie").innerHTML = dados.numero_serie
-        document.getElementById("ipv4").innerHTML = dados.numero_serie
+        
+        document.getElementById("ipv4").innerHTML = dados.endereco_ipv4
+        document.getElementById("mac").innerHTML = dados.endereco_mac
         document.getElementById("nome-sala-computador").innerHTML = dados.nome
         document.getElementById("id-computador").innerHTML = dados.idMaquina
 
@@ -32,26 +33,74 @@ async function buscarInfoMaquina(idMaquina){
 }
 
 
+async function listarJanela(idMaquina){
+    
+    try {
+        var resposta = await fetch(`/pages/dashboard/maquina/listar-janelas/${idMaquina}`)
+        
+        
+    } catch (erro) {
+        console.error('Erro na requisição:', erro);
+    }
+
+   if(resposta.ok){
+        const dados = await resposta.json();
+        console.log("Janelas abertas", dados)
+
+
+        var janela = document.getElementById('janelas')
+
+        for (let i = 0; i < dados.length; i++) {
+
+            janela.innerHTML = `
+            <div class="instancias">
+            <div class="iconApp">
+                <button  onclick="fecharJanela(${dados[i].idJanela})">X</button>
+            </div>
+
+            <div class="instancia">${dados[i].titulo}</div>
+            <div class="dtRegistro">${dados[i].caminho}/div>
+        </div>
+
+            `
+            
+        }
+       
+
+   
+   }
+
+
+
+}
+
 async function redenderizarGraficos(idMaquina){
     try {
         var respostaCPU = await fetch(`maquina/graficos/1/${idMaquina}/12`);
-
         var usoCPU = await respostaCPU.json();
+        
+        var respostaInfoCPU = await fetch(`maquina/componentes/1/${idMaquina}`)
+        var InfoCPU = await respostaInfoCPU.json()
+
+       
 
     } catch (erro) {
         console.error('Erro na requisição:', erro);
     }
 
     if (respostaCPU.ok) {
+
+        document.getElementById("nome_cpu").innerHTML = InfoCPU[0].nome
+        document.getElementById("nucleos_cpu").innerHTML = InfoCPU[0].total
       
         for (let i = 0; i < usoCPU.length; i++) {
             const valor = usoCPU[i].valor;
 
             dadosCPU.push(Number(valor))
-            
+            graficoCPU.update()   
         }
 
-        cpuChart.update()
+        
     }
 
     try {
@@ -59,21 +108,25 @@ async function redenderizarGraficos(idMaquina){
         var usoRam = await respostaRam.json();
 
 
+        var respostaInfoRAM = await fetch(`maquina/componentes/2/${idMaquina}`)
+        var InfoRAM = await respostaInfoRAM.json()
+
     } catch (erro) {
         console.error('Erro na requisição:', erro);
     }
 
     if (respostaRam.ok) {
+
+        document.getElementById("total_ram").innerHTML = InfoRAM[0].total
       
         for (let i = 0; i < usoRam.length; i++) {
             const valor = usoRam[i].valor;
 
             dadosRam.push(Number(valor))
-
-            
+            graficoRam.update()
         }
 
-        graficoRam.update()
+        
     }
 
 
@@ -81,16 +134,20 @@ async function redenderizarGraficos(idMaquina){
         var respostaDisco = await fetch(`maquina/graficos/3/${idMaquina}/1`);
         var usoDisco = await respostaDisco.json();
 
-        var respostaInfoComponentes = await fetch(`maquina/componentes/3/${idMaquina}`)
-        var InfoComponentes = await respostaInfoComponentes.json()
+        var respostaInfoDisco = await fetch(`maquina/componentes/3/${idMaquina}`)
+        var InfoDisco = await respostaInfoDisco.json()
     
 
     } catch (erro) {
         console.error('Erro na requisição:', erro);
     }
 
-    if (respostaDisco.ok && respostaInfoComponentes.ok) {
-        dadosDisco.splice(0, 2, InfoComponentes[0].total - usoDisco[0].valor, usoDisco[0].valor)
+    if (respostaDisco.ok && respostaInfoDisco.ok) {
+
+        document.getElementById("nome_disco").innerHTML = InfoDisco[0].nome
+        document.getElementById("total_disco").innerHTML = InfoDisco[0].total
+
+        dadosDisco.splice(0, 2, InfoDisco[0].total - usoDisco[0].valor, usoDisco[0].valor)
         graficoDisco.update()
     }
 
@@ -103,4 +160,10 @@ async function redenderizarGraficos(idMaquina){
 function atualizacaoMaquina(idMaquina){
     buscarInfoMaquina(idMaquina)
     redenderizarGraficos(idMaquina)
+
+
+    // setTimeout(() => {  
+    //     atualizacaoMaquina(idMaquina)
+        
+    // }, 1000);
 }

@@ -178,11 +178,11 @@ async function listarMaquinaPorSala(idSala) {
 }
 
 
-async function capturaComponente(maquina, componente, tipoDado, div){
+async function capturaComponente(maquina, componente, limite, div){
 
     try {
         // Requisição para a CPU
-        var resposta = await fetch(`maquina/valor/${maquina}/${componente}/${tipoDado}`);
+        var resposta = await fetch(`maquina/graficos/${componente}/${maquina}/${limite}`);
         var uso = await resposta.json();
         console.log('Uso:', uso[0].valor);
 

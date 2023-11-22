@@ -25,6 +25,14 @@ router.get("/componentes/:idComponente/:idMaquina/", function(req, res){
     maquinaController.infoComponentes(req, res);
 })
 
+router.get("/fechar-janela/:idJanela/", function(req, res){
+    maquinaController.fecharJanela(req, res);
+})
+
+router.get("/listar-janelas/:idMaquina", function(req, res){
+    maquinaController.listarJanela(req, res);
+})
+
 
 router.get("/valor/:idMaquina/:idComponente/:idTipoDados", function(req, res){
     maquinaController.buscarUltimoValor(req, res);

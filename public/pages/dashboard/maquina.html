@@ -13,7 +13,7 @@
     <script src="../../js/api/maquinaEpecifica.js"></script>
 </head>
 
-<body onload="atualizacaoMaquina(sessionStorage.ID_MAQUINA)">
+<body onload="atualizacaoMaquina(sessionStorage.ID_MAQUINA),listarJanela(sessionStorage.ID_MAQUINA)">
     <!-- Inicio dos itens da header -->
     <div class="help-screen" id="help-screen">
         <div class="help-window">
@@ -105,18 +105,35 @@
                             <div class="informacoesAlerta">
                                 <div class="tituloStatus">Status</div>
                                 <div class="status">
-                                    <span id="componente-valores"><span id="componente">CPU: </span><span id="valorCPU">
-                                            </span>%</span>
-                                    <span id="componente-valores"><span id="componente">RAM: </span><span id="valorRAM">
-                                            </span>%</span>
-                                    <span id="componente-valores"><span id="componente">Disco: </span><span id="valorDISCO">
-                                            </span>%</span>
-                                    <span id="componente-valores"><span id="componente">Rede:</span><span id="valores">
-                                            Sem
-                                            conexão</span></span>
-                                    <span id="componente-valores"><span id="componente">Janelas:</span><span
-                                            id="valores">
-                                            Uso indevido</span></span>
+                                    <span id="componente-valores">
+                                        <span id="componente">End. IPV4:</span>
+                                        <span id="ipv4"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">End. MAC:</span>
+                                        <span id="mac"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">CPU:</span>
+                                        <span id="nome_cpu"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Núcleos:</span>
+                                        <span id="nucleos_cpu"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Disco:</span>
+                                        <span id="nome_disco"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente"> Armz. Disco:</span>
+                                        <span id="total_disco"></span>
+                                    </span>
+
+                                    <span id="componente-valores">
+                                        <span id="componente">Armz RAM:</span>
+                                        <span id="total_ram"></span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="icones-e-alertas">
@@ -124,35 +141,27 @@
                                 <div class="status">
                                     <span id="componente-valores">
                                         <span id="componente">Marca: </span>
-                                        <span  id="marca"></span>
+                                        <span id="marca"></span>
                                     </span>
                                     <span id="componente-valores">
                                         <span id="componente">Modelo :</span>
-                                        <span  id="modelo"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">SO: </span>
-                                        <span  id="so"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">Processador: </span>
-                                        <span  id="processador"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">Ram: </span>
-                                        <span id="totalRam"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">Armazenamento: </span>
-                                        <span id="totalDisco"></span>
+                                        <span id="modelo"></span>
                                     </span>
                                     <span id="componente-valores">
                                         <span id="componente">N° de série:</span>
                                         <span id="numSerie"></span>
                                     </span>
                                     <span id="componente-valores">
-                                        <span id="componente">End. IPV4:</span>
-                                        <span id="ipv4"></span>
+                                        <span id="componente">SO: </span>
+                                        <span id="so"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Arquitetura: </span>
+                                        <span id="arquitetura"> bits</span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Fabricante: </span>
+                                        <span id="fabricante"> bits</span>
                                     </span>
                                 </div>
                             </div>
@@ -163,16 +172,16 @@
             <div class="blocoTodosGraficos">
                 <div class="nome-id-computador">
                     <span id="nome-sala-computador">DESKTOP-DOUGLAS | Sala 001</span>
-                    <span id="id-computador">ID: 01324 </span>
+                    ID:<span id="id-computador"> 01324 </span>
                 </div>
 
 
                 <div class="wifi-disco">
                     <div class="container-bloco">
 
-                        <span id="titulo-componente">Wi-Fi</span>
-                        <div class="bloco-wifi">
-                            <canvas id="meuGraficoWifi">
+                        <span id="titulo-componente">CPU</span>
+                        <div class="bloco-cpu">
+                            <canvas id="meuGraficoCPU">
                             </canvas>
                         </div>
                     </div>
@@ -181,23 +190,20 @@
 
                     <div class="container-bloco">
 
-                        <span id="titulo-componente">Disco</span>
-                        <div class="bloco-disco">
-                            <canvas id="meuGraficoDisco">
-                                <!-- Grafico -->
-                            </canvas>
-                            <div class="InfoGrafico">
-                                <div class="separacaoInformacoes">
-                                    <div class="corLegendaVerde"></div>
-                                    <div class="legenda">Espaço disponível.</div>
-                                </div>
-
-                                <div class="separacaoInformacoes">
-                                    <div class="corLegendaVermelha"></div>
-                                    <div class="legenda">Espaço em uso.</div>
-                                </div>
-
-                            </div>
+                        <span id="titulo-componente">Status</span>
+                        <div class="bloco-status">
+                            <span class="box-valor-componente">
+                                <span class="nome_componente">CPU</span>
+                                <div class="unidadeMedida"><span  class="valor_componente" id="valorCPU"></span>%</div>
+                            </span>
+                            <span class="box-valor-componente">
+                                <span class="nome_componente">RAM</span>
+                                <div class="unidadeMedida"><span class="valor_componente" id="valorRAM"></span>gb</div>
+                           </span>
+                            <span class="box-valor-componente">
+                                <span class="nome_componente">Disco</span>
+                                <div class="unidadeMedida"><span class="valor_componente" id="valorDISCO"></span>gb</div>
+                            </span>
 
                         </div>
                     </div>
@@ -219,9 +225,23 @@
                         <div class="container-bloco-ram-cpu">
 
                             <span id="titulo-componente">CPU</span>
-                            <div class="bloco-cpu">
-                                <canvas id="meuGraficoCPU">
+                            <div class="bloco-disco">
+                                <canvas id="meuGraficoDisco">
+                                    <!-- Grafico -->
                                 </canvas>
+                                <div class="InfoGrafico">
+                                    <div class="separacaoInformacoes">
+                                        <div class="corLegendaVerde"></div>
+                                        <div class="legenda">Espaço disponível.</div>
+                                    </div>
+
+                                    <div class="separacaoInformacoes">
+                                        <div class="corLegendaVermelha"></div>
+                                        <div class="legenda">Espaço em uso.</div>
+                                    </div>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -237,96 +257,9 @@
                                     <div class="dicaDtRegistro">Data / Hora</div>
                                 </div>
 
-                                <div class="conteudoSites">
+                                <div class="conteudoSites" id="janelas">
 
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/chrome 1.svg"
-                                                alt="">
-                                        </div>
-
-                                        <div class="instancia">https://youtube.com</div>
-                                        <div class="dtRegistro">20/09/2023 | 19:45:33</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/github (1) 1.svg"
-                                                alt="">
-                                        </div>
-
-                                        <div class="instancia">Safe Monitor - Read Me</div>
-                                        <div class="dtRegistro">20/09/2023 | 19:40:03</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/figma 1.svg" alt="">
-                                        </div>
-
-                                        <div class="instancia">File | Wireframe-e-Site</div>
-                                        <div class="dtRegistro">20/09/2023 | 18:27:41</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/Group.svg" alt="">
-                                        </div>
-
-                                        <div class="instancia" style="color: red; font-weight: bold;">Instagram *
-                                            Bate-Papo</div>
-                                        <div class="dtRegistro">20/09/2023 | 13:58:19</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/valorant-vermeio.svg"
-                                                alt="">
-                                        </div>
-
-                                        <div class="instancia" style="color: red; font-weight: bold;">Valorant.exe</div>
-                                        <div class="dtRegistro">20/09/2023 | 09:30:41</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/visual-studio-code 1.svg"
-                                                alt="">
-                                        </div>
-
-                                        <div class="instancia">Index.html</div>
-                                        <div class="dtRegistro">19/09/2023 | 23:20:10</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/microsoft-icon 1.svg"
-                                                alt="">
-                                        </div>
-
-                                        <div class="instancia">store.install.spotify</div>
-                                        <div class="dtRegistro">19/09/2023 | 22:15:00</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/sptech_principal_ciano 1.svg"
-                                                alt="">
-                                        </div>
-
-                                        <div class="instancia">Análise de Sistemas</div>
-                                        <div class="dtRegistro">19/09/2023 | 21:37:23</div>
-                                    </div>
-
-                                    <div class="instancias">
-                                        <div class="iconApp">
-                                            <img src="../../assets/assets-dashboard/icons-historico/intellij 1.svg"
-                                                alt="">
-                                        </div>
-
-                                        <div class="instancia">TesteColaborador.java</div>
-                                        <div class="dtRegistro">19/09/2023 | 20:05:06</div>
-                                    </div>
+                                  
 
                                 </div>
                             </div>

@@ -1,54 +1,4 @@
-
-    // GRAFICO WIFI
-    var graficoWifi = document.getElementById('meuGraficoWifi').getContext('2d');
-
-    var gradient = graficoWifi.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(169, 223, 216, 1)');
-    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.4)'); 
-    
-    
-    
-    const labelWifi = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
-    const dadosWifi = [100, 60, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0]
-
-    var wifiData = {
-        labels: labelWifi,
-        fontSize: '10px',
-        datasets: [
-            {
-                label: "Consumo de Rede",
-                data: dadosWifi,
-                fill: true,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1,
-                backgroundColor: gradient,
-                pointRadius: 0,
-            }
-        ]
-    };
-
-    
-    var wifiChart = new Chart(graficoWifi, {
-        type: 'line',
-        data: wifiData,
-        options: {
-            scales: {
-                y: {
-                    grid: {
-                        display: false,
-                        
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false 
-                    }
-                }
-            }
-        }
-    })
-    
-    
+ 
     // GRÁFICO DISCO
     
     var graficoDisco = document.getElementById('meuGraficoDisco').getContext('2d');
@@ -74,6 +24,9 @@
     var graficoDisco = new Chart(doughnutCtx, {
         type: 'doughnut',
         data: doughnutData,
+        options: {
+            animation: false, // Desativa as animações
+        }
     });
     
     
@@ -144,11 +97,12 @@
                 tension: 0.1,
                 backgroundColor: gradient,
                 pointRadius: 0,
+                pointRadius: 2,
             }
         ]
     };
     
-    var cpuChart = new Chart(meuGraficoCPU, {
+    var graficoCPU = new Chart(meuGraficoCPU, {
         type: 'line',
         data: CPUData,
         options: {
