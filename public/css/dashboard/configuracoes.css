@@ -1,25 +1,52 @@
-.config {
+.container {
+    padding: 50px 0px;
     position: relative;
     width: 100%;
-    height: 100vh;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
     background-image: url(../../assets/gradiente_inicio.png);
+}
+
+.config{
+    position: relative;
+    display: flex;
+    width: 80%;
+    padding-bottom: 50px;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .config-alerta {
     position: relative;
+    min-height: 110vh;
     width: 48%;
     height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    text-align: center;
+    justify-content: center;
+    gap: 50px;
     padding: 20px;  
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.459);
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.96);
+}
+
+.box-editar-valor{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+.box-inp-editar{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 20px;
 }
 
 .config-alerta ul {
@@ -30,23 +57,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    gap: 50px;
 
 }
+
+.btt-inps{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
 
 .config-alerta ul li {
     position: relative;
     width: 100%;
-    height: 18%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 50px;
 }
+
 
 .config-alerta ul li input {
     position: relative;
-    width: 60%;
+    width: 100%;
     height: 10px;
     outline: none;
 } 

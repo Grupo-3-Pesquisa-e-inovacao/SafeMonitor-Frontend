@@ -436,3 +436,51 @@ width: 49%;
     height: 100%;
 
 }
+
+.box-valor-componente{
+    display: flex;
+    width: 32%;
+    flex-direction: column-reverse;
+    justify-content: center;
+    height: 90%;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+
+}
+
+.bloco-status{   
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.status-componentes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 20px;
+    color: transparent;
+}
+
+.cor-status{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: aqua;
+}
+
+.valor_componente{
+    font-size: 25px;
+}
+
+.nome_componente{
+    font-size: 20px;
+    font-weight: 700;
+}
+

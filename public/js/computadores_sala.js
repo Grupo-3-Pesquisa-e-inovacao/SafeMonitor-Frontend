@@ -10,26 +10,6 @@ function fecharModal() {
     document.getElementById("containerSalas").style.display = "flex";
 }
 
-// Função para adicionar uma nova sala
-function adicionarSala() {
-    const nomeSala = document.getElementById("inputNomeSala").value;
-
-    if (nomeSala) {
-        const novaSala = criarNovaSala(nomeSala);
-
-        // Adicione a nova sala ao miniContainerSalas
-        const miniContainerSalas = document.getElementById("miniContainerSalas");
-        miniContainerSalas.appendChild(novaSala);
-
-        // Feche o modal
-        fecharModal();
-
-        // Chame a função para atualizar os ícones e valores da nova sala
-        atualizarIconesEValores(novaSala);
-    } else {
-        alert("Por favor, preencha todos os campos.");
-    }
-}
 
 // Função para criar uma nova sala
 function criarNovaSala(nomeSala) {
@@ -101,15 +81,15 @@ function atualizarIconesEValores(sala) {
     const numeroAleatorioDisco = Math.floor(Math.random() * 100) + 1;
 
     // Atualizar os elementos de texto com os valores aleatórios
-    const cpuElement = sala.querySelector("#cpu");
-    const discoElement = sala.querySelector("#disco");
-    const ramElement = sala.querySelector("#ram");
-    const redeElement = sala.querySelector("#rede");
+    // const cpuElement = sala.querySelector("#cpu");
+    // const discoElement = sala.querySelector("#disco");
+    // const ramElement = sala.querySelector("#ram");
+    // const redeElement = sala.querySelector("#rede");
 
-    cpuElement.innerHTML = `<span style="font-weight: bold">CPU:</span> <span style="color: ${definirCor(numeroAleatorioCPU)}">${numeroAleatorioCPU}%</span>`;
-    discoElement.innerHTML = `<span style="font-weight: bold">Disco:</span> <span style="color: ${definirCor(numeroAleatorioDisco)}">${numeroAleatorioDisco}%</span>`;
-    ramElement.innerHTML = `<span style="font-weight: bold">RAM:</span> <span style="color: ${definirCor(numeroAleatorioRAM)}">${numeroAleatorioRAM}%</span>`;
-    redeElement.innerHTML = `<span style="font-weight: bold">Rede:</span> <span style="color: ${definirCor(numeroAleatorioRede)}">${numeroAleatorioRede}%</span>`;
+    // cpuElement.innerHTML = `<span style="font-weight: bold">CPU:</span> <span style="color: ${definirCor(numeroAleatorioCPU)}">${numeroAleatorioCPU}%</span>`;
+    // discoElement.innerHTML = `<span style="font-weight: bold">Disco:</span> <span style="color: ${definirCor(numeroAleatorioDisco)}">${numeroAleatorioDisco}%</span>`;
+    // ramElement.innerHTML = `<span style="font-weight: bold">RAM:</span> <span style="color: ${definirCor(numeroAleatorioRAM)}">${numeroAleatorioRAM}%</span>`;
+    // redeElement.innerHTML = `<span style="font-weight: bold">Rede:</span> <span style="color: ${definirCor(numeroAleatorioRede)}">${numeroAleatorioRede}%</span>`;
 }
 
 // Função para definir a cor com base no valor

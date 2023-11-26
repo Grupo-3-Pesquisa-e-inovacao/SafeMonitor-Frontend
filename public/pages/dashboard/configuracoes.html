@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Dashboard - SafeMonitor</title>
+    <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
+    <link rel="stylesheet" href="../../css/dashboard/configuracoes.css">
+    <script src="../../js/api/alerta.js"></script>
+    <script src="../../js/api/maquina.js"></script>
+</head>
+
+<body>
+    <!-- Inicio dos itens da header -->
+    <div class="help-screen" id="help-screen">
+        <div class="help-window">
+            <div class="window-top">
+                <div class="close" onclick="showHelp()">
+                    X
+                </div>
+
+            </div>
+
+            <ul class="help-info">
+                <li>Lista de alertas</li>
+                <li><img src="../../assets/assets-dashboard/dangerous.svg" alt="">
+                    <p> - Alerta critico</p>
+                </li>
+                <li><img src="../../assets/assets-dashboard/alert-amarelo.svg" alt="">
+                    <p> - Alerta atenção</p>
+                </li>
+                <li><img src="../../assets/assets-dashboard/alert-verde.svg" alt="">
+                    <p> - Alerta OK</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu-mobile" id="menu-mobile">
+        <ul class="icons">
+            <li onclick="showHelp()">?</li>
+            <li><img src="../../assets/assets-dashboard/cog.png" alt=""><a href="dashboard_configuracoes.html"></a></li>
+            <li><img src="../../assets/assets-dashboard/user.png" alt=""><a href="./dashboard_perfil.html"></a></li>
+        </ul>
+        <a href="">Inicio</a>
+        <a href="">Dash geral</a>
+        <a href="">Salas</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="../../assets/logo/logo_horizontal.png" alt="">
+            <a href="./dashboard_geral.html"></a>
+        </div>
+        <div class="links">
+            <a href="./dashboard_geral.html">Visão Geral</a>
+            <a href="./salas.html">Visão Salas</a>
+        </div>
+
+        <div class="options">
+            <div class="icon ajuda" onclick="showHelp()">
+                ?
+            </div>
+            <div class="icon">
+                <img src="../../assets/assets-dashboard/cog.png" alt="">
+                <a href="./configuracoes.html"></a>
+            </div>
+            <div class="icon">
+                <img src="../../assets/assets-dashboard/user.png" alt="">
+                <a href="./perfil.html"></a>
+            </div>
+        </div>
+
+        <div class="hb-menu" onclick="showMenu()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+    <!-- Fim dos itens da header -->
+
+    <div class="container">
+        <div class="config">
+            <div class="config-alerta">
+                <h1>Quando emitir um alerta amarelo?</h1>
+                <ul>
+                    <li>
+                        <label for="cpu">CPU</label>
+                        <div class="box-editar-valor">
+                            <p>A partir de: <span id="cpu_amarelo"></span>%</p>
+                            <button onclick="mostrarInput('box-cpu-amarelo')">Editar</button>
+                        </div>
+
+                        <div class="box-inp-editar" id="box-cpu-amarelo" style="display: none;">
+                            <input type="range" id="inp_cpu_amarelo" name="cpu" min="1" max="100">
+                            <div class="btt-inps">
+                                <button onclick="fecharInput('box-cpu-amarelo')">Cancelar</button>
+                                <button onclick="alterarLimite(inp_cpu_amarelo.value, 1, 1)">Salvar</button>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <label for="ram">Meoria RAM</label>
+
+                        <div class="box-editar-valor">
+                            <p>A partir de: <span id="ram_amarelo"></span>%</p>
+                            <button onclick="mostrarInput('box-ram-amarelo')">Editar</button>
+                        </div>
+
+                        <div class="box-inp-editar" id="box-ram-amarelo" style="display: none;">
+                            <input type="range" id="inp_ram_amarelo" name="ram" min="1" max="100">
+                            <div class="btt-inps">
+                                <button onclick="fecharInput('box-ram-amarelo')">Cancelar</button>
+                                <button onclick="alterarLimite(inp_ram_amarelo.value, 1, 2)">Salvar</button>
+                            </div>
+
+                        </div>
+                    </li>
+                    <li>
+                        <label for="disco">Disco</label>
+
+                        <div class="box-editar-valor">
+                            <p>A partir de: <span id="disco_amarelo"></span>%</p>
+                            <button onclick="mostrarInput('box-disco-amarelo')">Editar</button>
+                        </div>
+
+                        <div class="box-inp-editar" id="box-disco-amarelo" style="display: none;">
+                            <input type="range" id="inp_disco_amarelo" name="disco" min="1" max="100">
+                            <div class="btt-inps">
+                                <button onclick="fecharInput('box-disco-amarelo')">Cancelar</button>
+                                <button onclick="alterarLimite(inp_disco_amarelo.value, 1, 3)">Salvar</button>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="config-alerta">
+                <h1>Quando emitir um alerta vermelho?</h1>
+                <ul>
+                    <li>
+                        <label for="cpu">CPU</label>
+
+                        <div class="box-editar-valor">
+                            <p>A partir de: <span id="cpu_vermelho"></span>%</p>
+                            <button onclick="mostrarInput('box-cpu-vermelho')">Editar</button>
+                        </div>
+
+                        <div class="box-inp-editar" id="box-cpu-vermelho" style="display: none;">
+                            <input type="range" id="inp_cpu_vermelho" name="cpu" min="1" max="100">
+                            <div class="btt-inps">
+                                <button onclick="fecharInput('box-cpu-vermelho')">Cancelar</button>
+                                <button onclick="alterarLimite(inp_cpu_vermelho.value, 2, 1)">Salvar</button>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <label for="ram">Memória RAM</label>
+
+                        <div class="box-editar-valor">
+                            <p>A partir de: <span id="ram_vermelho"></span>%</p>
+                            <button onclick="mostrarInput('box-ram-vermelho')">Editar</button>
+                        </div>
+
+                        <div class="box-inp-editar" id="box-ram-vermelho" style="display: none;">
+                            <input type="range" id="inp_ram_vermelho" name="ram" min="1" max="100">
+                            <div class="btt-inps">
+                                <button onclick="fecharInput('box-ram-vermelho')">Cancelar</button>
+                                <button onclick="alterarLimite(inp_ram_vermelho.value, 2, 2)">Salvar</button>
+                            </div>
+                        </div>
+
+
+                    </li>
+                    <li>
+                        <label for="disco">Disco</label>
+
+                        <div class="box-editar-valor">
+                            <p>A partir de: <span id="disco_vermelho"></span>%</p>
+                            <button onclick="mostrarInput('box-disco-vermelho')">Editar</button>
+                        </div>
+
+
+
+                        <div class="box-inp-editar" id="box-disco-vermelho" style="display: none;">
+                            <input type="range" id="inp_disco_vermelho" name="disco" min="1" max="100">
+                            <div class="btt-inps">
+                                <button onclick="fecharInput('box-disco-vermelho')">Cancelar</button>
+                                <button onclick="alterarLimite(inp_disco_vermelho.value, 2, 3)">Salvar</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p>Safe Monitor - 2023 - Todos direitos reservados</p>
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+    mostrarValorRange('inp_cpu_amarelo', 'cpu_amarelo');
+    mostrarValorRange('inp_ram_amarelo', 'ram_amarelo');
+    mostrarValorRange('inp_disco_amarelo', 'disco_amarelo');
+
+    mostrarValorRange('inp_cpu_vermelho', 'cpu_vermelho');
+    mostrarValorRange('inp_ram_vermelho', 'ram_vermelho');
+    mostrarValorRange('inp_disco_vermelho', 'disco_vermelho');
+
+    function mostrarValorRange(input, display) {
+
+        var rangeInput = document.getElementById(input);
+        var displayValue = document.getElementById(display);
+
+        rangeInput.addEventListener('input', function () {
+            displayValue.textContent = rangeInput.value;
+        });
+
+    }
+</script>

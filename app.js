@@ -4,12 +4,15 @@ process.env.AMBIENTE_PROCESSO = "desenvolvimento";
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
-var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 80 : 80;
+var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 3333 : 8080;
 
 var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var maquinaRouter = require("./src/routes/maquina")
+var salaRouter = require("./src/routes/sala")
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,6 +22,10 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
+app.use("/pages/dashboard/maquina", maquinaRouter);
+app.use("/pages/dashboard/sala", salaRouter);
+
+
 
 
 app.listen(PORTA, function () {
