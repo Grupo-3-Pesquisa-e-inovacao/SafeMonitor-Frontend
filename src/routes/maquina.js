@@ -3,7 +3,7 @@ var router = express.Router();
 
 var maquinaController = require("../controllers/maquinaController");
 
-//Recebendo os dados do html e direcionando para a função cadastrar de maquinaController.js
+
 router.post("/cadastrar", function (req, res) {
     maquinaController.cadastrar(req, res);
 })
@@ -25,7 +25,7 @@ router.get("/componentes/:idComponente/:idMaquina/", function(req, res){
     maquinaController.infoComponentes(req, res);
 })
 
-router.get("/fechar-janela/:idJanela/", function(req, res){
+router.put("/fechar-janela/:idJanela/", function(req, res){
     maquinaController.fecharJanela(req, res);
 })
 
@@ -44,6 +44,22 @@ router.put("/alterar/:idMaquina", function(req, res){
 
 router.delete("/deletar/:idMaquina", function(req, res){
     maquinaController.deletar(req, res);
+})
+
+router.put("/alterar-limite/:idNot/:idTipoComp", function(req, res){
+    maquinaController.alterarLimite(req, res);
+})
+
+router.post("/notificar", function(req, res){
+    maquinaController.notificar(req, res);
+})
+
+router.get("/limite/:idNot/:idTipoComp", function(req, res){
+    maquinaController.buscarLimite(req, res);
+})
+
+router.get("/maquina-empresa/:idEmpresa", function(req, res){
+    maquinaController.listarMaquinasEmpresa(req, res);
 })
 
 module.exports = router;

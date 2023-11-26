@@ -60,7 +60,7 @@
         </div>
         <div class="links">
             <a href="./dashboard_geral.html">Visão Geral</a>
-            <a href="./dashboard_visao_salas.html">Visão Salas</a>
+            <a href="./salas.html">Visão Salas</a>
         </div>
 
         <div class="options">
@@ -69,11 +69,11 @@
             </div>
             <div class="icon">
                 <img src="../../assets/assets-dashboard/cog.png" alt="">
-                <a href="./dashboard_configuracoes.html"></a>
+                <a href="./configuracoes.html"></a>
             </div>
             <div class="icon">
                 <img src="../../assets/assets-dashboard/user.png" alt="">
-                <a href="./dashboard_perfil.html"></a>
+                <a href="./perfil.html"></a>
             </div>
         </div>
 
@@ -96,49 +96,16 @@
                     </div>
                     <div class="info-computador">
 
-                        <div class="iconeGrandeAlerta">
-                            <img src="../../assets/assets-dashboard/dangerous.svg" alt="">
-                            <span>CRÍTICO</span>
+                        <div class="iconeGrandeAlerta" id="stt-maquina">
+                            
+                           
                         </div>
 
                         <div class="blocoInfoAlerta">
-                            <div class="informacoesAlerta">
-                                <div class="tituloStatus">Status</div>
-                                <div class="status">
-                                    <span id="componente-valores">
-                                        <span id="componente">End. IPV4:</span>
-                                        <span id="ipv4"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">End. MAC:</span>
-                                        <span id="mac"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">CPU:</span>
-                                        <span id="nome_cpu"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">Núcleos:</span>
-                                        <span id="nucleos_cpu"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente">Disco:</span>
-                                        <span id="nome_disco"></span>
-                                    </span>
-                                    <span id="componente-valores">
-                                        <span id="componente"> Armz. Disco:</span>
-                                        <span id="total_disco"></span>
-                                    </span>
-
-                                    <span id="componente-valores">
-                                        <span id="componente">Armz RAM:</span>
-                                        <span id="total_ram"></span>
-                                    </span>
-                                </div>
-                            </div>
                             <div class="icones-e-alertas">
-                                <div class="tituloStatus">Expecificações</div>
+                               
                                 <div class="status">
+                                    <div class="tituloStatus">Expecificações</div>
                                     <span id="componente-valores">
                                         <span id="componente">Marca: </span>
                                         <span id="marca"></span>
@@ -163,6 +130,38 @@
                                         <span id="componente">Fabricante: </span>
                                         <span id="fabricante"> bits</span>
                                     </span>
+
+                                    <span id="componente-valores">
+                                        <span id="componente">End. IPV4:</span>
+                                        <span id="ipv4"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">End. MAC:</span>
+                                        <span id="mac"></span>
+                                    </span>
+
+                                    <span id="componente-valores">
+                                        <span id="componente">CPU:</span>
+                                        <span id="nome_cpu"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Núcleos:</span>
+                                        <span id="nucleos_cpu"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente">Disco:</span>
+                                        <span id="nome_disco"></span>
+                                    </span>
+                                    <span id="componente-valores">
+                                        <span id="componente"> Armz. Disco:</span>
+                                        <span id="total_disco"></span>
+                                    </span>
+
+                                    <span id="componente-valores">
+                                        <span id="componente">Armz RAM:</span>
+                                        <span id="total_ram"></span>
+                                    </span>
+
                                 </div>
                             </div>
                         </div>
@@ -194,18 +193,29 @@
                         <div class="bloco-status">
                             <span class="box-valor-componente">
                                 <span class="nome_componente">CPU</span>
-                                <div class="unidadeMedida"><span  class="valor_componente" id="valorCPU"></span>%</div>
+                                <div class="unidadeMedida"><span class="valor_componente" id="valorCPU"></span>%</div>
+                                <div class="status-componentes">
+                                    <div class="cor-status" id="status-cpu">.</div>
+                                </div>
                             </span>
                             <span class="box-valor-componente">
                                 <span class="nome_componente">RAM</span>
-                                <div class="unidadeMedida"><span class="valor_componente" id="valorRAM"></span>gb</div>
-                           </span>
+                                <div class="unidadeMedida"><span class="valor_componente" id="valorRAM"></span>%</div>
+                                <div class="status-componentes">
+                                    <div class="cor-status" id="status-ram">.</div>
+                                </div>
+                            </span>
                             <span class="box-valor-componente">
                                 <span class="nome_componente">Disco</span>
-                                <div class="unidadeMedida"><span class="valor_componente" id="valorDISCO"></span>gb</div>
+                                <div class="unidadeMedida"><span class="valor_componente" id="valorDISCO"></span>%</div>
+                                <div class="status-componentes">
+                                    <div class="cor-status" id="status-disco">.</div>
+                                </div>
                             </span>
 
                         </div>
+
+                        spa
                     </div>
                 </div>
 
@@ -246,6 +256,7 @@
                         </div>
                     </div>
 
+                    <div id="testes"></div>
                     <div class="historico">
                         <div class="container-bloco-historico">
 
@@ -259,7 +270,7 @@
 
                                 <div class="conteudoSites" id="janelas">
 
-                                  
+
 
                                 </div>
                             </div>

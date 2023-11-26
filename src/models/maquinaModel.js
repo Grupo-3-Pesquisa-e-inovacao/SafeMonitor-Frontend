@@ -15,6 +15,12 @@ function listar(idSala) {
     return database.executar(instrucao);
 }
 
+function listarMaquinasEmpresa(idEmpresa) {
+    var instrucao = `SELECT * FROM maquina WHERE fk_empresa = ${idEmpresa};`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function capturaUltimoValor(idComponente, idTipoDados, idMaquina) {
     var instrucao = `CALL ultimo_valor_captura(${idComponente}, ${idTipoDados}, ${idMaquina});`;
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -76,6 +82,31 @@ function alterar(nome, modelo, numeroSerie, marca, idMaquina) {
     return database.executar(instrucao);
 }
 
+function alterarLimite(limite, idNot, idTipoComp){
+    var instrucao = `UPDATE limites SET limite = ${limite} WHERE fk_notificacao = ${idNot} AND fk_tipoComponente = ${idTipoComp};`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function buscarLimite(idNot, idTipoComp) {
+    var instrucao = `CALL info_limites(${idNot}, ${idTipoComp})`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function notificar(captura, tipoDados, componente, maquina, tipoComponente, tipoNot){
+    var instrucao = `
+    INSERT INTO notificacao (data_hora, fk_idCaptura, fk_tipoDados, fk_componente, fk_maquina, fk_tipoComponente, fk_tipoNotificacao) 
+    VALUES (now(), ${captura}, ${tipoDados}, ${componente}, ${maquina}, ${tipoComponente}, ${tipoNot});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+
+
+
 
 
 module.exports = {
@@ -88,5 +119,9 @@ module.exports = {
     buscarMaquina,
     infoComponentes,
     listarJanela,
-    fecharJanela
+    fecharJanela,
+    alterarLimite,
+    notificar,
+    buscarLimite,
+    listarMaquinasEmpresa
 };

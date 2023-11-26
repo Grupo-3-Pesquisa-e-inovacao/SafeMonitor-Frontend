@@ -64,6 +64,31 @@ function listar(req, res) {
 }
 
 
+function listarMaquinasEmpresa(req, res) {
+
+    var idEmpresa = req.params.idEmpresa;
+
+    maquinaModel.listarMaquinasEmpresa(idEmpresa).then(function (resultado) {
+
+        if (resultado.length > 0) {
+
+            const maquina = resultado
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
 function buscarMaquina(req, res) {
 
     var idMaquina = req.params.idMaquina;
@@ -248,6 +273,79 @@ function deletar(req, res) {
 }
 
 
+function alterarLimite(req, res) {
+
+    var limite = req.body.limiteVar;
+    var idNot = req.params.idNot;
+    var idTipoComp = req.params.idTipoComp;
+
+    maquinaModel.alterarLimite(limite, idNot, idTipoComp)
+    .then(
+        function (resultado) {
+            console.log(resultado)
+            res.json(resultado);
+        }
+    )
+    .catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+
+function notificar(){
+
+    var captura = req.body.captura;
+    var tipoDados = req.body.tipoDados;
+    var componente = req.body.componente;
+    var maquina = req.body.maquina;
+    var tipoComponente = req.body.tipoComponente;
+    var tipoNot = req.body.tipoNot;
+
+    maquinaModel.notificar(captura, tipoDados, componente, maquina, tipoComponente, tipoNot).then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const alerta = resultado[0]
+            console.log(alerta);
+            res.json(alerta);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+function buscarLimite(req, res) {
+
+    var idNot = req.params.idNot;
+    var idTipoComp = req.params.idTipoComp
+
+    maquinaModel.buscarLimite(idNot, idTipoComp).then(function (resultado) {
+
+        if (resultado.length > 0) {
+
+            const maquina = resultado[0]
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 
 module.exports = {
@@ -260,7 +358,11 @@ module.exports = {
     graficosComponentes,
     infoComponentes,
     listarJanela,
-    fecharJanela
+    fecharJanela,
+    alterarLimite,
+    listarMaquinasEmpresa,
+    buscarLimite,
+    
 }
 
 

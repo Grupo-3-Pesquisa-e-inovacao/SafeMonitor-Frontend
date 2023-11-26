@@ -180,17 +180,39 @@ async function listarMaquinaPorSala(idSala) {
 
 async function capturaComponente(maquina, componente, limite, div){
 
+
+    var ultimaCaptura = '';
     try {
         // Requisição para a CPU
         var resposta = await fetch(`maquina/graficos/${componente}/${maquina}/${limite}`);
         var uso = await resposta.json();
-        console.log('Uso:', uso[0].valor);
+        
+        valor = Number(uso[0].valor_monitorado);
+        
 
-        document.getElementById(`${div}`).innerHTML = uso[0].valor
+        if (componente != 1){
+            var respostaTotal = await fetch(`maquina/componentes/${componente}/${maquina}`)
+            var total = await respostaTotal.json();
+            valor = (Number(uso[0].valor_monitorado) * 100) / Number(total[0].total)
+        }
+
+        document.getElementById(`${div}`).innerHTML = valor.toFixed(2)
+
+        var ultimaCaptura = {
+            idCaptura: uso[0].idCaptura,
+            valor: uso[0].valor_monitorado,
+            dtHora: uso[0].dt_hora,
+            idMaquina: uso[0].fk_maquina,
+            idTipoDados: uso[0].fk_tipoDados,
+            idComponente: uso[0].fk_componente,
+            idTipoComponente: uso[0].fk_tipoComponente
+        }
     
     } catch (erro) {
         console.error('Erro na requisição do uso:', erro);
-    }''
+    }
+
+    return ultimaCaptura;
 
 }
 
