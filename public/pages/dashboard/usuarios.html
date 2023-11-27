@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header & Footer</title>
+    <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
+    <link rel="stylesheet" href="../../css/dashboard/usuarios.css">
+</head>
+<body>
+    <!-- Inicio dos itens da header -->
+    <div class="help-screen" id="help-screen">
+        <div class="help-window">
+            <div class="window-top">
+                <div class="close" onclick="showHelp()">
+                    X
+                </div>
+            </div>
+
+            <ul class="help-info">
+                <li>Lista de alertas</li>
+                <li><img src="../../assets/assets-dashboard/dangerous.svg" alt=""> <p> - Alerta critico</p></li>
+                <li><img src="../../assets/assets-dashboard/alert-amarelo.svg" alt=""> <p> - Alerta atenção</p></li>
+                <li><img src="../../assets/assets-dashboard/alert-verde.svg" alt=""> <p> - Alerta OK</p></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="menu-mobile" id="menu-mobile">
+        <ul class="icons">
+            <li onclick="showHelp()">?</li>
+            <li><img src="../../assets/assets-dashboard/cog.png" alt=""></li>
+            <li><img src="../../assets/assets-dashboard/user.png" alt=""></li>
+        </ul>
+        <a href="">Inicio</a>
+        <a href="">Dash geral</a>
+        <a href="">Salas</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <img src="../../assets/logo/logo_horizontal.png" alt="">
+            <a href="./dashboard_geral.html"></a>
+        </div>
+        <div class="links">
+            <a href="./dashboard_geral.html">Visão Geral</a>
+            <a href="./salas.html">Visão Salas</a>
+            <a href="./usuarios.html">Visão Usuarios</a>
+        </div>
+
+        <div class="options">
+            <div class="icon ajuda" onclick="showHelp()">
+                ?
+            </div>
+            <div class="icon">
+                <img src="../../assets/assets-dashboard/cog.png" alt="">
+                <a href="./configuracoes.html"></a>
+            </div>
+            <div class="icon">
+                <img src="../../assets/assets-dashboard/user.png" alt="">
+                <a href="./perfil.html"></a>
+            </div>
+        </div>
+
+        <div class="hb-menu" onclick="showMenu()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </header>
+<!-- Fim dos itens da header -->
+
+    <div class="section">
+        <div class="container">
+            <ul class="user-list">
+                <li class="list-header">
+                    <p class="email">Email</p>
+                    <p class="data">Data</p>
+                    <p class="tipo">Tipo</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>
+                <li class="list-user">
+                    <p class="email">admin@gmail.com</p>
+                    <p class="data">10/10/23</p>
+                    <p class="tipo">professor</p>   
+                </li>   
+
+            </ul>
+            <div class="buttons">
+                <div class="button">
+                    <p>adicionar usuario</p>
+                </div>
+                <div class="button">
+                    <p>remover usuario</p>
+                </div>
+                <div class="button">
+                    <p>alterar usuario</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Safe Monitor - 2023 - Todos direitos reservados</p>
+    </footer>
+</body>
+</html>
+
+<script>
+    let helpScreen = document.getElementById("help-screen")
+    let menuMobile = document.getElementById("menu-mobile")
+
+    function showHelp() {
+        helpScreen.classList.toggle("visible")
+    }
+
+    function showMenu() {
+        menuMobile.classList.toggle("visible")
+    }
+</script>
