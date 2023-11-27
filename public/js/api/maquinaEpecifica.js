@@ -291,5 +291,5 @@ function atualizacaoMaquina(idMaquina){
     setTimeout(() => {  
         atualizacaoMaquina(idMaquina)
         
-    }, 2000);
+    }, 3000);
 }

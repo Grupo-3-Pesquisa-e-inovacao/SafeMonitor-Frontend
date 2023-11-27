@@ -556,16 +556,28 @@ function atualizarGraficos() {
     graficoStt()
     graficoLigadas()
     verificarDados()
+
+    setTimeout(() => {  
+        atualizacaoMaquina(idMaquina)
+        
+    }, 3000);
 }
 
 
-// buscarLimite(1, 1, 'cpu_amarelo');
-// buscarLimite(1, 2, 'ram_amarelo');
-// buscarLimite(1, 3, 'disco_amarelo');
+function atualizarLimites(){
+    buscarLimite(1, 1, 'cpu_amarelo');
+    buscarLimite(1, 2, 'ram_amarelo');
+    buscarLimite(1, 3, 'disco_amarelo');
 
-// buscarLimite(2, 1, 'cpu_vermelho');
-// buscarLimite(2, 2, 'ram_vermelho');
-// buscarLimite(2, 3, 'disco_vermelho');
+    buscarLimite(2, 1, 'cpu_vermelho');
+    buscarLimite(2, 2, 'ram_vermelho');
+    buscarLimite(2, 3, 'disco_vermelho');
+
+    setTimeout(() => {  
+        atualizacaoMaquina(idMaquina)
+        
+    }, 3000);
+}
 
 
 
