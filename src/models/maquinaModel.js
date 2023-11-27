@@ -40,13 +40,13 @@ function infoComponentes(idComponente, idMaquina) {
     return database.executar(instrucao);
 }
 
-function fecharJanela(idJanela){
+function fecharJanela(idJanela) {
     var instrucao = `UPDATE janela SET matar = 1 WHERE idJanela = ${idJanela}`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function listarJanela(idMaquina){
+function listarJanela(idMaquina) {
     var instrucao = `SELECT * FROM janela WHERE fk_maquina = ${idMaquina} AND stt = 'Aberta';`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -73,8 +73,6 @@ function buscarMaquina(idMaquina) {
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function alterar(nome, modelo, numeroSerie, marca, idMaquina) {
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucao = `
        UPDATE maquina SET nome = '${nome}', modelo = '${modelo}', numero_serie = '${numeroSerie}', 
        marca = '${marca}' WHERE idMaquina = ${idMaquina}`;
@@ -82,7 +80,7 @@ function alterar(nome, modelo, numeroSerie, marca, idMaquina) {
     return database.executar(instrucao);
 }
 
-function alterarLimite(limite, idNot, idTipoComp){
+function alterarLimite(limite, idNot, idTipoComp) {
     var instrucao = `UPDATE limites SET limite = ${limite} WHERE fk_notificacao = ${idNot} AND fk_tipoComponente = ${idTipoComp};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -94,18 +92,66 @@ function buscarLimite(idNot, idTipoComp) {
     return database.executar(instrucao);
 }
 
-function notificar(captura, tipoDados, componente, maquina, tipoComponente, tipoNot){
+function notificar(captura, tipoDados, componente, maquina, tipoComponente, tipoNot) {
     var instrucao = `
     INSERT INTO notificacao (data_hora, fk_idCaptura, fk_tipoDados, fk_componente, fk_maquina, fk_tipoComponente, fk_tipoNotificacao) 
     VALUES (now(), ${captura}, ${tipoDados}, ${componente}, ${maquina}, ${tipoComponente}, ${tipoNot});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
+
 }
 
 
+function graficoNotificacoes(){
+    var instrucao = `
+    SELECT COUNT(*) as total, 
+    HOUR(data_hora) as hora, fk_tipoNotificacao as tipoNot
+    FROM notificacao 
+    GROUP BY hora, tipoNot , data_hora
+    ORDER BY data_hora
+    LIMIT 10;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function graficoSttMaquinas(){
+    var instrucao = `
+    SELECT count(*) as total, stt_maquina AS stt 
+    FROM maquina WHERE fk_empresa = 1 
+    GROUP BY stt;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function graficoMaquinasLigadas(){
+    var instrucao = `
+    SELECT count(*) as total, ligada 
+    FROM maquina WHERE fk_empresa = 1 
+    GROUP BY ligada;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 
+function alterarStatusMaquina(idMaquina, status){
+    var instrucao = `
+    UPDATE maquina SET stt_maquina = '${status}' WHERE idMaquina = ${idMaquina};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function alterarMaquinaLigada(idMaquina, ligada){
+    var instrucao = `
+    UPDATE maquina SET ligada = '${ligada}' WHERE idMaquina = ${idMaquina};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 
 
@@ -123,5 +169,10 @@ module.exports = {
     alterarLimite,
     notificar,
     buscarLimite,
-    listarMaquinasEmpresa
+    listarMaquinasEmpresa,
+    graficoNotificacoes,
+    graficoMaquinasLigadas,
+    graficoSttMaquinas,
+    alterarStatusMaquina,
+    alterarMaquinaLigada
 };

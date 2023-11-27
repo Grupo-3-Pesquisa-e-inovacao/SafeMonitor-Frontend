@@ -62,4 +62,23 @@ router.get("/maquina-empresa/:idEmpresa", function(req, res){
     maquinaController.listarMaquinasEmpresa(req, res);
 })
 
+router.get("/garfico-noticacoes/", function(req, res){
+    maquinaController.graficoNotificacoes(req, res);
+})
+
+router.get("/garfico-stt/", function(req, res){
+    maquinaController.graficoSttMaquinas(req, res);
+})
+
+router.get("/garfico-ligadas/", function(req, res){
+    maquinaController.graficoMaquinasLigadas(req, res);
+})
+
+router.put("/alterar-status/:idMaquina", function(req, res){
+    maquinaController.alterarStatusMaquina(req, res);
+})
+router.put("/alterar-estado/:idMaquina", function(req, res){
+    maquinaController.alterarMaquinaLigada(req, res);
+})
+
 module.exports = router;

@@ -7,9 +7,11 @@
     <title>Geral | Dashboard - SafeMonitor</title>
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
     <link rel="stylesheet" href="../../css/dashboard/dashboard_geral.css">
+    <script src="../../js/api/alerta.js"></script>
+
 </head>
 
-<body>
+<body onload="atualizarGraficos()">
     <!-- Inicio dos itens da header -->
     <div class="help-screen" id="help-screen">
         <div class="help-window">
@@ -37,8 +39,8 @@
     <div class="menu-mobile" id="menu-mobile">
         <ul class="icons">
             <li onclick="showHelp()">?</li>
-            <li><img src="../../assets/assets-dashboard/cog.png" alt=""><a href="dashboard_configuracoes.html"></a></li>
-            <li><img src="../../assets/assets-dashboard/user.png" alt=""><a href="./dashboard_perfil.html"></a></li>
+            <li><img src="../../assets/assets-dashboard/cog.png" alt=""><a href="configuracoes.html"></a></li>
+            <li><img src="../../assets/assets-dashboard/user.png" alt=""><a href="./perfil.html"></a></li>
         </ul>
         <a href="">Inicio</a>
         <a href="">Dash geral</a>
@@ -128,15 +130,15 @@
                 <div class="legendas">
                     <div class="legend-item">
                         <div class="legend-color" style="background-color: #109A68;"></div>
-                        Operação Normal
+                        Operação OK
                     </div>
                     <div class="legend-item">
                         <div class="legend-color" style="background-color: #DAC617;"></div>
-                        Operação em Alerta
+                        Operação em Aviso
                     </div>
                     <div class="legend-item">
                         <div class="legend-color" style="background-color: #FF0000;"></div>
-                        Operação em Risco
+                        Operação em Urgente
                     </div>
                 </div>
 
@@ -145,7 +147,7 @@
                     <span class="tooltip">Aqui você vê todas suas maquinas e quantas estão ligadas ou desligadas</span>
 
 
-                    <h3> Total de 43 máquinas</h3>
+                    <h3 id="qtdMaq"> Total de máquinas: </h3>
 
                     <canvas id="myHorizontalBarChart" width="200" height="45"></canvas>
                 </div>
@@ -163,8 +165,8 @@
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script src="../../js/dashboard_geral.js"> </script>
+
 
 <script>
     let helpScreen = document.getElementById("help-screen")

@@ -296,7 +296,7 @@ function alterarLimite(req, res) {
 }
 
 
-function notificar(){
+function notificar(req, res){
 
     var captura = req.body.captura;
     var tipoDados = req.body.tipoDados;
@@ -347,6 +347,113 @@ function buscarLimite(req, res) {
     });
 }
 
+function graficoNotificacoes(req, res) {
+
+
+    maquinaModel.graficoNotificacoes().then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const maquina = resultado
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function graficoSttMaquinas(req, res) {
+
+
+    maquinaModel.graficoSttMaquinas().then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const maquina = resultado
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function graficoMaquinasLigadas(req, res) {
+
+
+    maquinaModel.graficoMaquinasLigadas().then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const maquina = resultado
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function alterarStatusMaquina(req, res) {
+
+    var status = req.body.status;
+    var idMaquina = req.params.idMaquina;
+
+    maquinaModel.alterarStatusMaquina(idMaquina, status)
+    .then(
+        function (resultado) {
+            console.log(resultado)
+            res.json(resultado);
+        }
+    )
+    .catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+
+function alterarMaquinaLigada(req, res) {
+
+    var ligada = req.body.ligada;
+    var idMaquina = req.params.idMaquina;
+
+    maquinaModel.alterarMaquinaLigada(idMaquina, ligada)
+    .then(
+        function (resultado) {
+            console.log(resultado)
+            res.json(resultado);
+        }
+    )
+    .catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+
 
 module.exports = {
     buscarUltimoValor,
@@ -362,7 +469,12 @@ module.exports = {
     alterarLimite,
     listarMaquinasEmpresa,
     buscarLimite,
-    
+    notificar,
+    graficoNotificacoes,
+    graficoMaquinasLigadas,
+    graficoSttMaquinas,
+    alterarStatusMaquina,
+    alterarMaquinaLigada
 }
 
 

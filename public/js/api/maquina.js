@@ -200,7 +200,7 @@ async function capturaComponente(maquina, componente, limite, div){
 
         var ultimaCaptura = {
             idCaptura: uso[0].idCaptura,
-            valor: uso[0].valor_monitorado,
+            valor: valor,
             dtHora: uso[0].dt_hora,
             idMaquina: uso[0].fk_maquina,
             idTipoDados: uso[0].fk_tipoDados,
@@ -215,6 +215,8 @@ async function capturaComponente(maquina, componente, limite, div){
     return ultimaCaptura;
 
 }
+
+
 
 
 function editarMaquina(id) {

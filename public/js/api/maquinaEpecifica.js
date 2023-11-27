@@ -27,11 +27,17 @@ async function buscarInfoMaquina(idMaquina){
         var valorRam =  await capturaComponente(idMaquina, 2, 1, "valorRAM")
         var valorDisco = await capturaComponente(idMaquina, 3, 1, "valorDISCO")
 
-        var sttCpu = await verificarStatusComponente(Number(valorCpu.valor_monitorado), 1, 'status-cpu')
-        var sttRam = await verificarStatusComponente(Number(valorRam.valor_monitorado), 2, 'status-ram')
-        var sttDisco =  await verificarStatusComponente(Number(valorDisco.valor_monitorado), 3, 'status-disco')
+        console.log(valorCpu.valor)
+        console.log(valorRam.valor)
+        console.log(valorDisco.valor)
 
-        verificarStatusMaquina(sttCpu, sttRam, sttDisco)
+       
+        var sttCpu = await verificarStatusComponente(Number(valorCpu.valor), 1, 'status-cpu')
+        var sttRam = await verificarStatusComponente(Number(valorRam.valor), 2, 'status-ram')
+        var sttDisco =  await verificarStatusComponente(Number(valorDisco.valor), 3, 'status-disco')
+
+        verificarStatusMaquina(sttCpu, sttRam, sttDisco, idMaquina)
+        verificarEstadoMaquina(idMaquina)
     }
 
 }
@@ -63,7 +69,7 @@ async function verificarStatusComponente(valor, componente, div){
 }
 
 
-function verificarStatusMaquina(cpu, ram, disco){
+function verificarStatusMaquina(cpu, ram, disco, id){
 
     const listaComponentes = []
 
@@ -71,7 +77,6 @@ function verificarStatusMaquina(cpu, ram, disco){
 
     console.log(listaComponentes)
 
-    var img = '';
 
     for (let i = 0; i < listaComponentes.length; i++) {
         
@@ -79,13 +84,17 @@ function verificarStatusMaquina(cpu, ram, disco){
             img = `<img src="../../assets/assets-dashboard/alert-amarelo.svg" alt="">
             <span style="color: yellow" >AVISO</span>`
 
+            alteraStatusBanco(id, 'Aviso')
+
         }else if(listaComponentes[i] == 'Urgente'){
             img = `<img src="../../assets/assets-dashboard/dangerous.svg" alt="">
             <span style="color: red" >URGENTE</span>`
+            alteraStatusBanco(id, 'Urgente')
 
         }else if(cpu == 'OK' && ram == 'OK' && disco == 'OK'){
             img = `<img src="../../assets/assets-dashboard/alert-verde.svg" alt="">
             <span style="color: green" >OK</span>`
+            alteraStatusBanco(id, 'OK')        
 
         }
         
@@ -94,6 +103,7 @@ function verificarStatusMaquina(cpu, ram, disco){
     document.getElementById('stt-maquina').innerHTML = img
 
 }
+
 
 
 async function listarJanela(idMaquina){

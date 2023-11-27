@@ -1,21 +1,26 @@
+
+const  dataAviso = []
+const  dataUrgente = []
+const labelNoti = []
+
 var barData = {
-    labels: ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"],
+    labels: labelNoti,
     datasets: [
         {
-            label: "Atenção",
-            data: [40, 20, 150, 100, 40, 260, 356, 200, 170, 160, 190, 340, 40, 20],
+            label: "Aviso",
+            data: dataAviso,
             backgroundColor: '#DAC617',
         },
         {
-            label: "Crítico",
-            data: [40, 20, 150, 100, 40, 260, 356, 200, 170, 160, 190, 340, 40, 20],
+            label: "Urgente",
+            data: dataUrgente,
             backgroundColor: '#FF0000',
         }
     ]
 };
 
 var barCtx = document.getElementById('myBarChart').getContext('2d');
-var barChart = new Chart(barCtx, {
+const barChart = new Chart(barCtx, {
     type: 'bar',
     data: barData,
     options: {
@@ -46,25 +51,30 @@ var barChart = new Chart(barCtx, {
 });
 
 
+const statusData = []
 // Gráfico de Rosca
 var doughnutData = {
     // labels: ["Operação Normal", "Operação em Alerta", "Operação em Risco"],
     datasets: [
         {
-            data: [18, 4, 8],
+            data: statusData,
             backgroundColor: ['#109A68', '#DAC617', '#FF0000'],
             borderRadius: 5,
         }
     ]
 };
 
+
+
 var doughnutCtx = document.getElementById('myDoughnutChart').getContext('2d');
-var doughnutChart = new Chart(doughnutCtx, {
+const doughnutChart = new Chart(doughnutCtx, {
     type: 'doughnut',
     data: doughnutData,
 });
 
 
+const maquinasLigadaData = []
+const maquinasDesligadaData = []
 var horizontalBarCtx = document.getElementById('myHorizontalBarChart').getContext('2d');
 
 var horizontalBarData = {
@@ -72,7 +82,7 @@ var horizontalBarData = {
     datasets: [
         {
             label: "Em uso",
-            data: [30],
+            data: maquinasLigadaData,
             backgroundColor: '#108456',
             barThickness: 20,
             borderRadius: 10,
@@ -80,7 +90,7 @@ var horizontalBarData = {
         },
         {
             label: "Desligados",
-            data: [13],
+            data: maquinasDesligadaData,
             backgroundColor: '#7ACBAD',
             barThickness: 20,
             borderRadius: 10,
@@ -89,7 +99,7 @@ var horizontalBarData = {
     ]
 };
 
-var horizontalBarChart = new Chart(horizontalBarCtx, {
+const horizontalBarChart = new Chart(horizontalBarCtx, {
     type: 'bar',
     data: horizontalBarData,
     options: {
