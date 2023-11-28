@@ -1,3 +1,41 @@
+.janela {
+    position: absolute;
+    width: 40%;
+    height: 68%;
+    top: 20%;
+    left: 20%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    z-index: 80;
+    padding: 10px 40px;
+}
+
+.janela.visivel {
+    display: flex;
+}
+
+.janela input {
+    position: relative;
+    width: 300px;
+    height: 32px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.janela .botoes {
+    position: relative;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 .section {
     position: relative;
     width: 100%;
@@ -79,7 +117,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 40%;
     height: 100%;
     border-right: solid 1px rgba(0, 0, 0, .2);
 }
@@ -88,7 +126,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25%;
+    width: 20%;
     height: 100%;
     border-right: solid 1px rgba(0, 0, 0, .2);
 }
@@ -98,8 +136,41 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25%;
+    width: 20%;
     height: 100%;
+}
+
+.edit {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height: 80%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-right: 4px;
+}
+
+.edit:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+.rmv {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height: 80%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.rmv:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
 }
 
 .buttons {
@@ -115,7 +186,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 68%;
+    width: 180px;
     height: 52px;
     background: #109A68;
     color: white;
@@ -125,4 +196,5 @@
 
 .button:hover {
     cursor: pointer;
+    background: #109a67bd;
 }

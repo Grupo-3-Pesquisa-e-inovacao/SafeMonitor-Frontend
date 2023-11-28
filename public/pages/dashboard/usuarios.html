@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header & Footer</title>
+    <title>Usuarios | Dashboard - SafeMonitor</title>
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
     <link rel="stylesheet" href="../../css/dashboard/usuarios.css">
 </head>
@@ -70,9 +70,30 @@
     </header>
 <!-- Fim dos itens da header -->
 
+    <div class="janela" id="janela-adicionar">
+        <label for="nome">nome:</label>
+        <input type="text" id="nome-a">
+        <label for="email">email:</label>
+        <input type="email" id="email-a">
+        <label for="cargo">cargo:</label>
+        <input type="text" id="cargo-a">
+        <label for="senha">senha:</label>
+        <input type="password" id="senha-a">
+        <label for="confirm-senha">cofirmar senha:</label>
+        <input type="password" id="confirm-a">
+        <div class="botoes">
+            <div class="button" onclick="adicionarUsuario()">
+                adicionar
+            </div>
+            <div class="button" onclick="showAdicionar()">
+                cancelar
+            </div>
+        </div>
+    </div>
+
     <div class="section">
         <div class="container">
-            <ul class="user-list">
+            <ul class="user-list" id="user-list">
                 <li class="list-header">
                     <p class="email">Email</p>
                     <p class="data">Data</p>
@@ -81,159 +102,19 @@
                 <li class="list-user">
                     <p class="email">admin@gmail.com</p>
                     <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
+                    <p class="tipo">professor</p> 
+                    <div class="edit">E</div>
+                    <div class="rmv">R</div>  
                 </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>
-                <li class="list-user">
-                    <p class="email">admin@gmail.com</p>
-                    <p class="data">10/10/23</p>
-                    <p class="tipo">professor</p>   
-                </li>   
+
 
             </ul>
             <div class="buttons">
-                <div class="button">
+                <div class="button" onclick="showAdicionar()">
                     <p>adicionar usuario</p>
                 </div>
-                <div class="button">
-                    <p>remover usuario</p>
-                </div>
-                <div class="button">
-                    <p>alterar usuario</p>
+                <div class="button" onclick="listarUsuarios()">
+                    <p>pesquisar usuario</p>
                 </div>
             </div>
         </div>
@@ -245,9 +126,45 @@
 </body>
 </html>
 
+<script src="../../js/api/login.js"></script>
+
 <script>
     let helpScreen = document.getElementById("help-screen")
     let menuMobile = document.getElementById("menu-mobile")
+    let janelaAdicionar = document.getElementById("janela-adicionar")
+
+    function showAdicionar() {
+        janelaAdicionar.classList.toggle("visivel")
+    }
+
+    function adicionarUsuario() {
+        let currentDate = new Date()
+
+        let lista = document.getElementById("user-list")
+        let nome = document.getElementById("nome-a").value.toLowerCase()
+        let email = document.getElementById("email-a").value.toLowerCase()
+        let cargo = document.getElementById("cargo-a").value.toLowerCase()
+        let senha = document.getElementById("senha-a").value.toLowerCase()
+        let confirm = document.getElementById("confirm-a").value.toLowerCase()
+
+        if(senha != confirm) {
+            alert("Senhas incompativeis...")
+            return
+        }
+
+        cadastrarUsuario(email, senha, nome, cargo)
+
+        lista.innerHTML += `
+                <li class="list-user">
+                    <p class="email">${email}</p>
+                    <p class="data">${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}</p>
+                    <p class="tipo">${cargo}</p>
+                    <div class="edit">E</div>
+                    <div class="rmv">R</div>     
+                </li>  
+        `
+        showAdicionar()
+    }
 
     function showHelp() {
         helpScreen.classList.toggle("visible")

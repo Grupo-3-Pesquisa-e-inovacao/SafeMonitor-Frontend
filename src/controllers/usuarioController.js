@@ -37,6 +37,7 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
+    var cargo =  req.body.cargoServer
     var empresaId = req.body.empresaServer;
 
     // Faça as validações dos valores
@@ -46,12 +47,14 @@ function cadastrar(req, res) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
+    } else if (cargo == undefined) {
+        res.status(400).send("Seu cargo está undefined!");
     } else if (empresaId == undefined) {
         res.status(400).send("Sua empresa está undefined!");
     } else {
 
         
-        usuarioModel.cadastrar(nome, email, senha, empresaId)
+        usuarioModel.cadastrar(nome, email, senha, cargo, empresaId)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -67,6 +70,22 @@ function cadastrar(req, res) {
                 }
             );
     }
+}
+
+function listar(req, res) {
+    var idEmpresa = 1;
+
+    usuarioModel.listar(idEmpresa)
+        .then(
+            function(resultado) {
+                res.json(resultado)
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro)
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
 }
 
 module.exports = {

@@ -44,16 +44,35 @@ function validarLogin() {
     })
 }
 
-function cadastrarUsuario() {
-    let emailVar = "teste@gmail.com";
-    let senhaVar = "12345";
-    let nomeVar = "testeSite";
-    let cargoVar = "Estagiário";
+function cadastrarUsuario(email, senha, nome, cargo) {
+    let emailVar = email;
+    let senhaVar = senha;
+    let nomeVar = nome;
+    let cargoVar = cargo;
     let cadastrarVar = 0;
-    let leituraVar = 1;
-    let alterarVar = 1;
+    let leituraVar = 0;
+    let alterarVar = 0;
     let deletarVar = 0;
 
+    if(cargoVar == "admnistrador") {
+        cadastrarVar = 1
+        leituraVar = 1
+        alterarVar = 1
+        deletarVar = 1
+    } else if(cargoVar == "professor") {
+        cadastrarVar = 0
+        leituraVar = 1
+        alterarVar = 1
+        deletarVar = 0
+    } else if(cargoVar == "comum") {
+        cadastrarVar = 0
+        leituraVar = 1
+        alterarVar = 0
+        deletarVar = 0
+    } else {
+        alert("tipo de usuario invalido...")
+        return
+    }
 
     fetch("/usuarios/cadastrar", {
         method: "POST",
@@ -72,7 +91,7 @@ function cadastrarUsuario() {
             EmpresaServer: sessionStorage.ID_EMPRESA
         })
     }).then(function (resposta) {
-        console.log("ESTOU NO THEN DO entrar()!")
+        console.log("ESTOU NO THEN DO cadastrarUsuario()!")
 
         if (resposta.ok) {
             console.log(resposta);
@@ -84,8 +103,7 @@ function cadastrarUsuario() {
             });
 
         } else {
-
-            console.log("Houve um erro ao tentar realizar o login!");
+            console.log("Houve um erro ao tentar realizar o cadastro!");
         }
 
     }).catch(function (erro) {
