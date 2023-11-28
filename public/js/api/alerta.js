@@ -172,7 +172,7 @@ async function graficoLigadas() {
         const not = await resposta.json();
         console.log(not)
         for (let i = 0; i < not.length; i++) {
-            ~
+             
             labelNoti.push(`${not[i].hora}:00hs`)
 
             if (not[i].ligada == "S") {
@@ -562,7 +562,7 @@ function atualizarGraficos() {
         
     }, 3000);
 }
-
+ 
 
 function atualizarLimites(){
     buscarLimite(1, 1, 'cpu_amarelo');
@@ -574,7 +574,7 @@ function atualizarLimites(){
     buscarLimite(2, 3, 'disco_vermelho');
 
     setTimeout(() => {  
-        atualizacaoMaquina(idMaquina)
+        atualizarLimites()
         
     }, 3000);
 }

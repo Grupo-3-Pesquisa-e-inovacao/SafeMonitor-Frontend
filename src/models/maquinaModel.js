@@ -40,8 +40,8 @@ function infoComponentes(idComponente, idMaquina) {
     return database.executar(instrucao);
 }
 
-function fecharJanela(idJanela) {
-    var instrucao = `UPDATE janela SET matar = 1 WHERE idJanela = ${idJanela}`;
+function fecharJanela(pid) {
+    var instrucao = `UPDATE janela SET matar = 1 WHERE pid = ${pid}`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }

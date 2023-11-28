@@ -105,6 +105,74 @@ function verificarStatusMaquina(cpu, ram, disco, id){
 }
 
 
+function alteraStatusBanco(id, stt) {
+
+    const rotaAPI = `/pages/dashboard/maquina/alterar-status/${id}`;
+    const dados = {
+        status: stt
+    }
+
+    const resposta = fetch(rotaAPI, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dados)
+    })
+
+    resposta.then(resposta => {
+
+        if (resposta.ok) {
+
+
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+
+    }).catch(erro => {
+        console.error('Erro na requisição:', erro);
+    });
+
+}
+
+
+
+function alterarEstadoBanco(id, estado) {
+
+    const rotaAPI = `/pages/dashboard/maquina/alterar-estado/${id}`;
+    const dados = {
+        ligada: estado
+    }
+
+    const resposta = fetch(rotaAPI, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dados)
+    })
+
+    resposta.then(resposta => {
+
+        if (resposta.ok) {
+        
+
+
+        } else if (resposta.status == 404) {
+            window.alert("Deu 404!");
+        } else {
+            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+
+    }).catch(erro => {
+        console.error('Erro na requisição:', erro);
+    });
+
+}
+
+
 
 async function listarJanela(idMaquina){
     
@@ -124,19 +192,18 @@ async function listarJanela(idMaquina){
 
         var janela = document.getElementById('janelas')
 
+        janela.innerHTML = " "
         for (let i = 0; i < dados.length; i++) {
 
             janela.innerHTML += `
             <div class="instancias">
                     <div class="iconApp">
-                        <button onclick="fecharJanela(${dados[i].idJanela})">X</button>
+                        <button onclick="fecharJanela(${dados[i].pid})">X</button>
                     </div>
 
                     <div class="instancia">${dados[i].titulos}</div>
                     <div class="dtRegistro">${dados[i].dt_hora}</div>
-                </div>
-
-                `
+                </div>`
             
         }
    }
@@ -223,9 +290,9 @@ async function redenderizarGraficos(idMaquina){
     }
 }
 
-function fecharJanela(id) {
+function fecharJanela(pid) {
 
-    const rotaAPI = `/pages/dashboard/maquina/fechar-janela/${id}`;
+    const rotaAPI = `/pages/dashboard/maquina/fechar-janela/${pid}`;
 
 
     const resposta = fetch(rotaAPI, {
@@ -286,6 +353,7 @@ async function retornaLimite(notificacao, tipoComponente) {
 function atualizacaoMaquina(idMaquina){
     buscarInfoMaquina(idMaquina)
     redenderizarGraficos(idMaquina)
+    listarJanela(idMaquina)
 
 
     setTimeout(() => {  
