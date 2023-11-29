@@ -39,6 +39,11 @@ function cadastrar(req, res) {
     var senha = req.body.senhaServer;
     var cargo =  req.body.cargoServer
     var empresaId = req.body.empresaServer;
+    var cadastrar = req.body.cadastrarServer
+    var ler = req.body.leituraServer
+    var alterar = req.body.alterarServer
+    var deletar = req.body.deletarServer
+    var capturar = req.body.capturarServer
 
     // Faça as validações dos valores
     if (nome == undefined) {
@@ -54,9 +59,10 @@ function cadastrar(req, res) {
     } else {
 
         
-        usuarioModel.cadastrar(nome, email, senha, cargo, empresaId)
+        usuarioModel.cadastrar(nome, email, senha, cargo, empresaId, cadastrar, ler, alterar, deletar, capturar)
             .then(
                 function (resultado) {
+                    console.log(resultado)
                     res.json(resultado);
                 }
             ).catch(
@@ -90,5 +96,6 @@ function listar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    listar
 }

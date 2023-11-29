@@ -3,7 +3,7 @@ function validarLogin() {
     let emailVar = document.getElementById('email').value
     let senhaVar = document.getElementById('pass').value
 
-    fetch("/usuarios/autenticar", {
+    fetch("/pages/dashboard/usuarios/autenticar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -49,6 +49,7 @@ function cadastrarUsuario(email, senha, nome, cargo) {
     let senhaVar = senha;
     let nomeVar = nome;
     let cargoVar = cargo;
+    let capturarVar = 0;
     let cadastrarVar = 0;
     let leituraVar = 0;
     let alterarVar = 0;
@@ -59,22 +60,25 @@ function cadastrarUsuario(email, senha, nome, cargo) {
         leituraVar = 1
         alterarVar = 1
         deletarVar = 1
+        capturarVar = 1;
     } else if(cargoVar == "professor") {
         cadastrarVar = 0
         leituraVar = 1
         alterarVar = 1
         deletarVar = 0
+        capturarVar = 0;
     } else if(cargoVar == "comum") {
         cadastrarVar = 0
         leituraVar = 1
         alterarVar = 0
         deletarVar = 0
+        capturarVar = 0;
     } else {
         alert("tipo de usuario invalido...")
         return
     }
 
-    fetch("/usuarios/cadastrar", {
+     fetch("/pages/dashboard/usuarios/cadastrar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -88,10 +92,12 @@ function cadastrarUsuario(email, senha, nome, cargo) {
             leituraServer: leituraVar,
             alterarServer: alterarVar,
             deletarServer: deletarVar,
-            EmpresaServer: sessionStorage.ID_EMPRESA
+            capturarServer: capturarVar,
+            empresaServer: sessionStorage.ID_EMPRESA
         })
     }).then(function (resposta) {
         console.log("ESTOU NO THEN DO cadastrarUsuario()!")
+        console.log("Resposta", resposta.status)
 
         if (resposta.ok) {
             console.log(resposta);
@@ -153,12 +159,34 @@ function alterarUsuarios(idUsuario){
 
 }
 
-function listarUsuarios(){
-    fetch(`usuarios/listar/${sessionStorage.getItem("ID_EMPRESA")}`).then(
+async function listarUsuarios(){
+    await fetch(`usuarios/listar/${sessionStorage.getItem("ID_EMPRESA")}`).then(
         
-        function (resposta) {
+        async function (resposta) {
         if (resposta.ok) {
-            console.log(resposta)
+            
+            const dados = await resposta.json()
+            
+            let lista = document.getElementById("user-list")
+        
+            
+            lista.innerHTML = ""
+            let currentDate = new Date()
+
+            for (let i = 0; i < dados.length; i++) {
+                lista.innerHTML += `
+                <li class="list-user">
+                    <p class="email">${dados[i].email}</p>
+                    <p class="data">${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}</p>
+                    <p class="tipo">${dados[i].cargo}</p>
+                    <div class="edit">E</div>
+                    <div class="rmv">R</div>     
+                </li>  
+        `
+                
+            }
+
+
         } else if (resposta.status == 404) {
             window.alert("Deu 404!");
         } else {
