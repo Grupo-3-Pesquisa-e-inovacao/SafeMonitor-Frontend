@@ -3,9 +3,9 @@ var database = require("../database/config")
 function cadastrar(nome, modelo, numeroSerie, marca, idEmpresa, idSala) {
     var instrucao = `
     INSERT INTO maquina (nome, modelo, numero_serie, marca, fk_empresa, fk_sala)
-	    VALUE("${nome}", "${modelo}", "${numeroSerie}", "${marca}", ${idEmpresa}, ${idSala});
+	    VALUE('${nome}', '${modelo}', '${numeroSerie}', '${marca}', ${idEmpresa}, ${idSala});
     `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
+    console.log('Executando a instrução SQL: \n' + instrucao);
     return database.executar(instrucao);
 }
 
