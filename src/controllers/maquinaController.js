@@ -454,6 +454,27 @@ function alterarMaquinaLigada(req, res) {
 }
 
 
+function buscarNotificacoes(req, res) {
+
+    maquinaModel.buscarNotificacoes().then(function (resultado) {
+
+        if (resultado.length > 0) {
+            const maquina = resultado
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 
 module.exports = {
     buscarUltimoValor,
@@ -474,7 +495,8 @@ module.exports = {
     graficoMaquinasLigadas,
     graficoSttMaquinas,
     alterarStatusMaquina,
-    alterarMaquinaLigada
+    alterarMaquinaLigada,
+    buscarNotificacoes
 }
 
 

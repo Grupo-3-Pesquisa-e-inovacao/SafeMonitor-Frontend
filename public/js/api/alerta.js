@@ -188,9 +188,34 @@ async function graficoLigadas() {
     } catch (erro) {
         console.error('Erro na requisição do uso:', erro);
     }
-
-
 }
+
+async function listarNotificacoes() {
+
+    const rotaAPI = `/pages/dashboard/maquina/listar-notificacoes/`
+
+    try {
+        const resposta = await fetch(rotaAPI, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!resposta.ok) {
+            throw new Error(`Erro na requisição: ${resposta.status}`);
+        }
+
+        const not = await resposta.json();
+        console.log(not)
+
+
+    } catch (erro) {
+        console.error('Erro na requisição do uso:', erro);
+    }
+}
+
+
+
 
 
 
@@ -456,6 +481,7 @@ async function retornaStatusComponente(valor, componente){
     return status;
 }
 
+
 function verificarStatusMaquina(cpu, ram, disco, id){
 
     const listaComponentes = []
@@ -572,6 +598,8 @@ function atualizarLimites(){
     buscarLimite(2, 1, 'cpu_vermelho');
     buscarLimite(2, 2, 'ram_vermelho');
     buscarLimite(2, 3, 'disco_vermelho');
+
+    listarNotificacoes()
 
     setTimeout(() => {  
         atualizarLimites()

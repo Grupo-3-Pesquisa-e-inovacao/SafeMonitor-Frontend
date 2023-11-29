@@ -74,6 +74,11 @@ router.get("/garfico-ligadas/", function(req, res){
     maquinaController.graficoMaquinasLigadas(req, res);
 })
 
+
+router.get("/listar-notificacoes/", function(req, res){
+    maquinaController.buscarNotificacoes(req, res);
+})
+
 router.put("/alterar-status/:idMaquina", function(req, res){
     maquinaController.alterarStatusMaquina(req, res);
 })

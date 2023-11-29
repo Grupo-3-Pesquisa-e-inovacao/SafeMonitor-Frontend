@@ -153,6 +153,12 @@ function alterarMaquinaLigada(idMaquina, ligada){
     return database.executar(instrucao);
 }
 
+function buscarNotificacoes() {
+    var instrucao = `CALL procedures_not();`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 
 
 module.exports = {
@@ -174,5 +180,6 @@ module.exports = {
     graficoMaquinasLigadas,
     graficoSttMaquinas,
     alterarStatusMaquina,
-    alterarMaquinaLigada
+    alterarMaquinaLigada,
+    buscarNotificacoes
 };
