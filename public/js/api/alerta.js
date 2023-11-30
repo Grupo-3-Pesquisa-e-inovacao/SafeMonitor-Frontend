@@ -85,21 +85,22 @@ async function graficoNoticacoes() {
             throw new Error(`Erro na requisição: ${resposta.status}`);
         }
 
-        const not = await resposta.json();
-        console.log(not)
-        for (let i = 0; i < not.length; i++) {
-            ~
-            labelNoti.push(`${not[i].hora}:00hs`)
-
-            if (not[i].tipoNot == 1) {
-                dataAviso.push(not[i].total)
-
-            } else {
-                dataUrgente.push(not[i].total)
+        if(resposta.status == 204){
+            console.log("Nada foi encontrado!")
+        }else{
+            const not = await resposta.json();
+            console.log("Graficoo", not.length)
+    
+            for (let i = 0; i < not.length; i++) {
+                labelNoti.splice(i, labelNoti.length, `${not[i].hora}:00hs`)
+                dataAviso.splice(i, dataAviso.length, not[i].totalAviso)
+                dataUrgente.splice(i, dataUrgente, not[i].totalUrgente)
+    
+    
+                barChart.update()
             }
-
-            barChart.update()
         }
+       
 
     } catch (erro) {
         console.error('Erro na requisição do uso:', erro);
@@ -172,7 +173,7 @@ async function graficoLigadas() {
         const not = await resposta.json();
         console.log(not)
         for (let i = 0; i < not.length; i++) {
-            ~
+
             labelNoti.push(`${not[i].hora}:00hs`)
 
             if (not[i].ligada == "S") {
@@ -188,23 +189,77 @@ async function graficoLigadas() {
     } catch (erro) {
         console.error('Erro na requisição do uso:', erro);
     }
+}
+
+async function listarNotificacoes() {
+
+    const rotaAPI = `/pages/dashboard/maquina/listar-notificacoes/${sessionStorage.ID_EMPRESA}`
+
+    try {
+        const resposta = await fetch(rotaAPI, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!resposta.ok) {
+            throw new Error(`Erro na requisição: ${resposta.status}`);
+        }
+
+        const not = await resposta.json();
+        const listaAlertas = []
 
 
+        var alertas = document.getElementById('alertas')
+        var imgUrgente = `../../assets/assets-dashboard/dangerous.svg`
+        var imgAviso = `../../assets/assets-dashboard/alert-amarelo.svg`
+
+       
+        for (let i = 0; i < not.length; i++) {
+            const alerta = not[i];
+            
+            if(alerta.verificado == null){
+                listaAlertas.splice(i, listaAlertas.length, alerta)
+            }
+            
+        }
+
+        
+
+        var rows = document.getElementById('tabelaBody') 
+        rows.innerHTML = ``;
+        listaAlertas.forEach(function(item) {
+          
+            rows.innerHTML = `
+
+                <tr>
+                <th><img src="${item.stt == "Urgente" ? imgUrgente : imgAviso}" alt=""></th>
+                <th>${item.maquina}</th>
+                <th>${item.sala}</th>
+                </tr>
+            `
+
+    
+          });
+       
+            
+    } catch (erro) {
+        console.error('Erro na requisição do uso:', erro);
+    }
 }
 
 
 
-function notificar(idCaptura, idTipoDados, idComponente, IdMaquina, idTipoComponente, idTipoNot) {
+
+
+
+function notificar(maquina, idTipoAlerta) {
 
     const rotaAPI = '/pages/dashboard/maquina/notificar/';
 
     const dados = {
-        captura: idCaptura,
-        tipoDados: idTipoDados,
-        componente: idComponente,
-        maquina: IdMaquina,
-        tipoComponente: idTipoComponente,
-        tipoNot: idTipoNot
+        tipoAlerta: idTipoAlerta,
+        idMaquina: maquina
     };
 
     const resposta = fetch(rotaAPI, {
@@ -215,10 +270,33 @@ function notificar(idCaptura, idTipoDados, idComponente, IdMaquina, idTipoCompon
         body: JSON.stringify(dados),
     })
 
-    resposta.then(resposta => {
+    resposta.then(async resposta => {
 
         if (resposta.ok) {
-            alert("Notificacão")
+
+            try {
+                var respostaMaquina = await fetch(`maquina/informacoes/${maquina}`)
+            } catch (erro) {
+                console.error('Erro na requisição:', erro);
+            }
+
+            if (respostaMaquina.ok) {
+                let dados = await respostaMaquina.json();
+                let tipoNot = '';
+                let icon = '';
+
+                if (idTipoAlerta == 1) {
+                    tipoNot = 'Aviso'
+                    icon = "warning"
+
+                } else if (idTipoAlerta == 2) {
+                    tipoNot = 'Urgente'
+                    icon = 'error'
+                }
+
+                mensagem(icon, dados.nome + " - " + tipoNot)
+                console.log(icon, dados.nome + " - " + tipoNot)
+            }
 
 
         } else if (resposta.status == 404) {
@@ -261,7 +339,7 @@ async function retornaLimite(notificacao, tipoComponente) {
     return valor;
 }
 
-async function ultimoValorComponente(maquina, componente, limite){
+async function ultimoValorComponente(maquina, componente, limite) {
 
 
     var ultimaCaptura = '';
@@ -269,11 +347,11 @@ async function ultimoValorComponente(maquina, componente, limite){
         // Requisição para a CPU
         var resposta = await fetch(`maquina/graficos/${componente}/${maquina}/${limite}`);
         var uso = await resposta.json();
-        
-        valor = Number(uso[0].valor_monitorado);
-        
 
-        if (componente != 1){
+        valor = Number(uso[0].valor_monitorado);
+
+
+        if (componente != 1) {
             var respostaTotal = await fetch(`maquina/componentes/${componente}/${maquina}`)
             var total = await respostaTotal.json();
             valor = (Number(uso[0].valor_monitorado) * 100) / Number(total[0].total)
@@ -288,7 +366,7 @@ async function ultimoValorComponente(maquina, componente, limite){
             idComponente: uso[0].fk_componente,
             idTipoComponente: uso[0].fk_tipoComponente
         }
-    
+
     } catch (erro) {
         console.error('Erro na requisição do uso:', erro);
     }
@@ -296,6 +374,8 @@ async function ultimoValorComponente(maquina, componente, limite){
     return ultimaCaptura;
 
 }
+
+
 
 
 async function verificarDados() {
@@ -320,80 +400,37 @@ async function verificarDados() {
             console.log(maquina.idMaquina)
 
             //VERIFICANDO O VALOR DOS COMPONENTES DE TODAS AS MAQUINAS
-            var valorCpu =  await ultimoValorComponente(maquina.idMaquina, 1, 1)
-            var valorRam =  await ultimoValorComponente(maquina.idMaquina, 2, 1)
+            var valorCpu = await ultimoValorComponente(maquina.idMaquina, 1, 1)
+            var valorRam = await ultimoValorComponente(maquina.idMaquina, 2, 1)
             var valorDisco = await ultimoValorComponente(maquina.idMaquina, 3, 1)
 
             //VERIFICANDO O STATUS DOS COMPONENTES DE TODAS AS MAQUINAS
             var sttCpu = await retornaStatusComponente(Number(valorCpu.valor), 1)
             var sttRam = await retornaStatusComponente(Number(valorRam.valor), 2)
-            var sttDisco =  await retornaStatusComponente(Number(valorDisco.valor), 3)
-            
+            var sttDisco = await retornaStatusComponente(Number(valorDisco.valor), 3)
 
-            verificarStatusMaquina(sttCpu, sttRam, sttDisco, maquina.idMaquina)
+
+            let statusMaquina = await verificarStatusMaquina(sttCpu, sttRam, sttDisco, maquina.idMaquina)
             verificarEstadoMaquina(maquina.idMaquina)
 
 
             qtdMaquina++;
 
-            try {
-                var respostaCPU = await fetch(`maquina/graficos/1/${maquina.idMaquina}/1`);
-                var usoCPU = await respostaCPU.json();
-                console.log(usoCPU)
-                var avisoCpu = await retornaLimite(1, 1);
-                var urgtCpu = await retornaLimite(2, 1);
+            console.log("Status maquina", statusMaquina)
 
-                if (usoCPU[0].valor_monitorado >= avisoCpu && usoCPU[0].valor_monitorado < urgtCpu) {
-                    notificar(usoCPU[0].idCaptura, usoCPU[0].fk_tipoDados, usoCPU[0].fk_componente, usoCPU[0].fk_maquina, usoCPU[0].fk_tipoComponente, 1)
+            let existeAlerta = await verificarAlertas(maquina.idMaquina)
 
-                } else if (usoCPU[0].valor_monitorado > urgtCpu) {
-                    notificar(usoCPU[0].idCaptura, usoCPU[0].fk_tipoDados, usoCPU[0].fk_componente, usoCPU[0].fk_maquina, usoCPU[0].fk_tipoComponente, 2)
+            console.log(existeAlerta)
+
+            if (!existeAlerta) {
+                if (statusMaquina = 'Urgente') {
+                    notificar(maquina.idMaquina, 2)
+
+                } else if (statusMaquina = 'Aviso') {
+                    notificar(maquina.idMaquina, 1)
                 }
 
-            } catch (erro) {
-                console.error('Erro na requisição:', erro);
             }
-
-
-            try {
-                var respostaRAM = await fetch(`maquina/graficos/2/${maquina.idMaquina}/1`);
-                var usoRAM = await respostaRAM.json();
-                console.log(usoRAM)
-
-                var avisoRam = await retornaLimite(1, 2);
-                var urgtRam = await retornaLimite(2, 2);
-
-                if (usoRAM[0].valor_monitorado >= avisoRam && usoRAM[0].valor_monitorado < urgtRam) {
-                    notificar(usoRAM[0].idCaptura, usoRAM[0].fk_tipoDados, usoRAM[0].fk_componente, usoRAM[0].fk_maquina, usoRAM[0].fk_tipoComponente, 1)
-
-                } else if (usoRAM[0].valor_monitorado > urgtRam) {
-                    notificar(usoRAM[0].idCaptura, usoRAM[0].fk_tipoDados, usoRAM[0].fk_componente, usoRAM[0].fk_maquina, usoRAM[0].fk_tipoComponente, 2)
-                }
-
-            } catch (erro) {
-                console.error('Erro na requisição:', erro);
-            }
-
-            try {
-                var respostaDisco = await fetch(`maquina/graficos/2/${maquina.idMaquina}/1`);
-                var usoDisco = await respostaDisco.json();
-                console.log(usoDisco)
-
-                var avisoDisco = await retornaLimite(1, 3);
-                var urgtDisco = await retornaLimite(2, 3);
-
-                if (usoDisco[0].valor_monitorado >= avisoDisco && usoDisco[0].valor_monitorado < urgtDisco) {
-                    notificar(usoDisco[0].idCaptura, usoDisco[0].fk_tipoDados, usoDisco[0].fk_componente, usoDisco[0].fk_maquina, usoDisco[0].fk_tipoComponente, 1)
-
-                } else if (usoDisco[0].valor_monitorado > urgtDisco) {
-                    notificar(usoDisco[0].idCaptura, usoDisco[0].fk_tipoDados, usoDisco[0].fk_componente, usoDisco[0].fk_maquina, usoDisco[0].fk_tipoComponente, 2)
-                }
-
-            } catch (erro) {
-                console.error('Erro na requisição:', erro);
-            }
-
-
 
         }
 
@@ -404,21 +441,21 @@ async function verificarDados() {
     }
 
 
-    async function verificarEstadoMaquina(id){
+    async function verificarEstadoMaquina(id) {
 
         try {
             // Requisição para a CPU
             var resposta = await fetch(`maquina/graficos/1/${id}/1`);
             var uso = await resposta.json();
-            
-    
+
+
             const limiteTempoDesligada = 60 * 1000; // 10 segundos em milissegundos
-    
-            const ultimoTimestamp = uso[0].dt_hora; 
+
+            const ultimoTimestamp = uso[0].dt_hora;
             const tempoAtual = new Date().getTime();
-        
+
             const diferencaTempo = tempoAtual - ultimoTimestamp;
-        
+
             if (diferencaTempo <= limiteTempoDesligada) {
                 console.log('A máquina está ligada.');
                 alterarEstadoBanco(id, "S")
@@ -428,36 +465,87 @@ async function verificarDados() {
                 alterarEstadoBanco(id, "N")
                 return false;
             }
-        
+
         } catch (erro) {
             console.error('Erro na requisição do uso:', erro);
         }
-        
-    
+
+
     }
 }
 
-async function retornaStatusComponente(valor, componente){
+
+async function verificarAlertas(id) {
+
+    var existeAlerta = true
+
+    try {
+        // Requisição para a CPU
+        for (let i = 1; i <= 2; i++) {
+            var resposta = await fetch(`maquina/verificar-alertas/${id}/${i}`);
+
+
+            if (resposta.ok) {
+
+                if(resposta.status == 204){
+                    existeAlerta = false;
+                }else{
+
+                    var uso = await resposta.json();
+                    console.log("alertas", uso)
+
+                    for (let j = 0; j < uso.length; j++) {
+                    
+                        if (uso.length > 0 && uso[j].verificado == null) {
+                            console.log(uso[j])
+                            existeAlerta = true
     
+                        }else{
+                            existeAlerta = false
+                        }
+                    }
+    
+        
+                }
+            
+            }
+
+
+        }
+
+    } catch (erro) {
+        console.error('Erro na requisição do uso:', erro);
+    }
+
+    return existeAlerta
+
+
+}
+
+
+async function retornaStatusComponente(valor, componente) {
+
     var status = '';
     var aviso = await retornaLimite(1, componente);
     var urgt = await retornaLimite(2, componente);
- 
-    if(valor >= aviso && valor < urgt ){
+
+    if (valor >= aviso && valor < urgt) {
         var status = 'Aviso';
 
-    }else if(valor > urgt){
+    } else if (valor > urgt) {
         var status = 'Urgente';
 
-    }else{
+    } else {
         var status = 'OK';
     }
 
     return status;
 }
 
-function verificarStatusMaquina(cpu, ram, disco, id){
 
+function verificarStatusMaquina(cpu, ram, disco, id) {
+
+    var statusMaquina = ''
     const listaComponentes = []
 
     listaComponentes.push(cpu, ram, disco)
@@ -465,20 +553,26 @@ function verificarStatusMaquina(cpu, ram, disco, id){
     console.log(listaComponentes)
 
 
+
     for (let i = 0; i < listaComponentes.length; i++) {
-        
-        if(listaComponentes[i] === 'Aviso'){
-            alteraStatusBanco(id, 'Aviso')
 
-        }else if(listaComponentes[i] == 'Urgente'){
+        if (listaComponentes[i] === 'Urgente') {
             alteraStatusBanco(id, 'Urgente')
+            statusMaquina = 'Urgente'
 
-        }else if(cpu == 'OK' && ram == 'OK' && disco == 'OK'){
-            alteraStatusBanco(id, 'OK')        
+        } else if (listaComponentes[i] == 'Aviso') {
+            alteraStatusBanco(id, 'Aviso')
+            statusMaquina = 'Aviso'
 
+
+        } else if (cpu == 'OK' && ram == 'OK' && disco == 'OK') {
+            alteraStatusBanco(id, 'OK')
+            statusMaquina = 'OK'
         }
-        
+
     }
+
+    return statusMaquina;
 
 }
 
@@ -535,7 +629,7 @@ function alterarEstadoBanco(id, estado) {
     resposta.then(resposta => {
 
         if (resposta.ok) {
-        
+
 
 
         } else if (resposta.status == 404) {
@@ -556,15 +650,16 @@ function atualizarGraficos() {
     graficoStt()
     graficoLigadas()
     verificarDados()
+    listarNotificacoes()
 
     setTimeout(() => {  
-        atualizacaoMaquina(idMaquina)
-        
+        atualizarGraficos()
+
     }, 3000);
 }
 
 
-function atualizarLimites(){
+function atualizarLimites() {
     buscarLimite(1, 1, 'cpu_amarelo');
     buscarLimite(1, 2, 'ram_amarelo');
     buscarLimite(1, 3, 'disco_amarelo');
@@ -573,10 +668,11 @@ function atualizarLimites(){
     buscarLimite(2, 2, 'ram_vermelho');
     buscarLimite(2, 3, 'disco_vermelho');
 
-    setTimeout(() => {  
-        atualizacaoMaquina(idMaquina)
-        
-    }, 3000);
+
+    setTimeout(() => {
+        atualizarLimites()
+
+    }, 10000);
 }
 
 

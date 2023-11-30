@@ -3,7 +3,7 @@ var database = require("../database/config")
 function cadastrar(nome, localizacao, idUsuario, idEmpresa) {
     var instrucao = `
     INSERT INTO sala_de_aula (nome, localizacao, fk_usuario, fk_empresa)
-	    VALUE("${nome}", "${localizacao}", ${idUsuario}, ${idEmpresa});
+	    VALUE('${nome}', '${localizacao}', ${idUsuario}, ${idEmpresa});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

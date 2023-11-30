@@ -3,9 +3,9 @@ var database = require("../database/config")
 function cadastrar(nome, modelo, numeroSerie, marca, idEmpresa, idSala) {
     var instrucao = `
     INSERT INTO maquina (nome, modelo, numero_serie, marca, fk_empresa, fk_sala)
-	    VALUE("${nome}", "${modelo}", "${numeroSerie}", "${marca}", ${idEmpresa}, ${idSala});
+	    VALUE('${nome}', '${modelo}', '${numeroSerie}', '${marca}', ${idEmpresa}, ${idSala});
     `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
+    console.log('Executando a instrução SQL: \n' + instrucao);
     return database.executar(instrucao);
 }
 
@@ -40,8 +40,8 @@ function infoComponentes(idComponente, idMaquina) {
     return database.executar(instrucao);
 }
 
-function fecharJanela(idJanela) {
-    var instrucao = `UPDATE janela SET matar = 1 WHERE idJanela = ${idJanela}`;
+function fecharJanela(pid) {
+    var instrucao = `UPDATE janela SET matar = 1 WHERE pid = ${pid}`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -92,10 +92,19 @@ function buscarLimite(idNot, idTipoComp) {
     return database.executar(instrucao);
 }
 
-function notificar(captura, tipoDados, componente, maquina, tipoComponente, tipoNot) {
+function notificar(tipoAlerta, idMaquina) {
     var instrucao = `
-    INSERT INTO notificacao (data_hora, fk_idCaptura, fk_tipoDados, fk_componente, fk_maquina, fk_tipoComponente, fk_tipoNotificacao) 
-    VALUES (now(), ${captura}, ${tipoDados}, ${componente}, ${maquina}, ${tipoComponente}, ${tipoNot});
+     INSERT INTO alerta (data_hora, fk_tipoAlerta, fk_maquina) VALUES (now(), ${tipoAlerta}, ${idMaquina});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
+
+function verificarSeExisteAlerta(tipoAlerta, idMaquina) {
+    var instrucao = `
+    SELECT * FROM alerta WHERE fk_maquina = ${idMaquina} AND fk_tipoAlerta = ${tipoAlerta};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -105,11 +114,12 @@ function notificar(captura, tipoDados, componente, maquina, tipoComponente, tipo
 
 function graficoNotificacoes(){
     var instrucao = `
-    SELECT COUNT(*) as total, 
-    HOUR(data_hora) as hora, fk_tipoNotificacao as tipoNot
-    FROM notificacao 
-    GROUP BY hora, tipoNot , data_hora
-    ORDER BY data_hora
+    SELECT
+    HOUR(data_hora) as hora,
+    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 1 AND HOUR(data_hora) = hora) AS totalAviso,
+    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 2 AND HOUR(data_hora) = hora) AS totalUrgente
+    FROM alerta
+    GROUP BY hora
     LIMIT 10;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -153,6 +163,12 @@ function alterarMaquinaLigada(idMaquina, ligada){
     return database.executar(instrucao);
 }
 
+function buscarNotificacoes(idEmpresa) {
+    var instrucao = `CALL procedures_not(${idEmpresa});`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 
 
 module.exports = {
@@ -174,5 +190,7 @@ module.exports = {
     graficoMaquinasLigadas,
     graficoSttMaquinas,
     alterarStatusMaquina,
-    alterarMaquinaLigada
+    alterarMaquinaLigada,
+    buscarNotificacoes,
+    verificarSeExisteAlerta
 };

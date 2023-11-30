@@ -1,7 +1,7 @@
 
-const  dataAviso = []
-const  dataUrgente = []
-const labelNoti = []
+let  dataAviso = []
+let  dataUrgente = []
+let labelNoti = []
 
 var barData = {
     labels: labelNoti,
@@ -20,7 +20,7 @@ var barData = {
 };
 
 var barCtx = document.getElementById('myBarChart').getContext('2d');
-const barChart = new Chart(barCtx, {
+let barChart = new Chart(barCtx, {
     type: 'bar',
     data: barData,
     options: {
@@ -34,6 +34,7 @@ const barChart = new Chart(barCtx, {
                 }
             }
         },
+        animation: false,
         scales: {
             x: {
                 grid: {
@@ -70,6 +71,9 @@ var doughnutCtx = document.getElementById('myDoughnutChart').getContext('2d');
 const doughnutChart = new Chart(doughnutCtx, {
     type: 'doughnut',
     data: doughnutData,
+    options:  {
+        animation: false
+    }
 });
 
 

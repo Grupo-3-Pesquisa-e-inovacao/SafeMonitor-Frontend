@@ -37,3 +37,55 @@ function mostrarMenu() {
   let menuScreen = document.getElementById("menu-screen")
   menuScreen.classList.toggle("active")
 }
+
+
+function mensagem(icone, mensagem){
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: icone,
+    title: mensagem
+  });
+}
+
+
+function generatePageButtons(itemsPerPage, data, buttons) {
+  var totalPages = Math.ceil(data.length / itemsPerPage);
+  var pageButtons = document.getElementById(`${buttons}`);
+  pageButtons.innerHTML = '';
+
+  for (var i = 1; i <= totalPages; i++) {
+    var button = document.createElement('button');
+    button.textContent = i;
+    button.addEventListener('click', function() {
+      var page = parseInt(this.textContent);
+      displayData(page);
+    });
+    pageButtons.appendChild(button);
+  }
+}
+
+
+function displayData(page, itemsPerPage, data, lista) {
+  var start = (page - 1) * itemsPerPage;
+  var end = start + itemsPerPage;
+  var displayedData = data.slice(start, end);
+
+  var dataList = document.getElementById(`${lista}`);
+  dataList.innerHTML = '';
+
+  displayedData.forEach(function(item) {
+    var li = document.createElement('li');
+    li.textContent = item.name;
+    dataList.appendChild(li);
+  });
+}
