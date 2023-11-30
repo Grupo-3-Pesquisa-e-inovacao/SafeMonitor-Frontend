@@ -298,17 +298,14 @@ function alterarLimite(req, res) {
 
 function notificar(req, res){
 
-    var captura = req.body.captura;
-    var tipoDados = req.body.tipoDados;
-    var componente = req.body.componente;
-    var maquina = req.body.maquina;
-    var tipoComponente = req.body.tipoComponente;
-    var tipoNot = req.body.tipoNot;
+    var idMaquina = req.body.idMaquina;
+    var tipoAlerta = req.body.tipoAlerta;
 
-    maquinaModel.notificar(captura, tipoDados, componente, maquina, tipoComponente, tipoNot).then(function (resultado) {
+
+    maquinaModel.notificar(tipoAlerta, idMaquina).then(function (resultado) {
 
         if (resultado.length > 0) {
-            const alerta = resultado[0]
+            const alerta = resultado    
             console.log(alerta);
             res.json(alerta);
 
@@ -321,6 +318,32 @@ function notificar(req, res){
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function verificarAlertas(req, res) {
+
+    var idMaquina = req.params.idMaquina;
+    var tipoAlerta = req.params.tipoAlerta;
+
+
+    maquinaModel.verificarSeExisteAlerta(tipoAlerta, idMaquina).then(function (resultado) {
+
+        if (resultado.length > 0) {
+
+            const maquina = resultado
+            console.log("ENTRANDO NO CONTROLER");
+            console.log("estou", maquina);
+            res.json(maquina);
+
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 
 function buscarLimite(req, res) {
@@ -456,10 +479,12 @@ function alterarMaquinaLigada(req, res) {
 
 function buscarNotificacoes(req, res) {
 
-    maquinaModel.buscarNotificacoes().then(function (resultado) {
+    var idEmpresa = req.params.idEmpresa
+
+    maquinaModel.buscarNotificacoes(idEmpresa).then(function (resultado) {
 
         if (resultado.length > 0) {
-            const maquina = resultado
+            const maquina = resultado[0]
             console.log("ENTRANDO NO CONTROLER");
             console.log("estou", maquina);
             res.json(maquina);
@@ -496,7 +521,8 @@ module.exports = {
     graficoSttMaquinas,
     alterarStatusMaquina,
     alterarMaquinaLigada,
-    buscarNotificacoes
+    buscarNotificacoes,
+    verificarAlertas
 }
 
 

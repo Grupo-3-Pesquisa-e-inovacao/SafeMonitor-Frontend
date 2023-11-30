@@ -116,49 +116,84 @@
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
+    overflow-y: scroll;
 }
 
 .alerta_notes p{
     font-size: small;
+    width: 100%;
+    
 }
 
 .localizacao_alerta{
     font-size: small;
     display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
 #nomeInfoAlerta{
     display: flex;
     justify-content: center;
-    width: 20%;
 
 }
 #nomeInfoID{
     display: flex;
     justify-content: center;
-    width: 13%;
 }
 
-#nomeInfoStatus{
-    width: 64%;
+
+
+.titulo_alerta{
+    position: fixed;
+
 }
-.alerta1 img{
+
+
+
+tr img{
     width: 30px;
     height: 30px;
+
 }
 
-.alerta1{
-    border: 1px solid #000;
-    border-radius: 5px;
+.scroll{
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+tr{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: center ;
+}
+
+table{
+    margin-top: 50px;
+}
+
+#tabelaBody tr:hover{
+    background-color: rgb(230, 230, 230);
+}
+
+td, th{
     display: flex;
     justify-content: center;
 }
 
-.alerta2 img{
-    width: 30px;
-    height: 30px;
+.alerta{
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    
 }
 
 .alerta2{

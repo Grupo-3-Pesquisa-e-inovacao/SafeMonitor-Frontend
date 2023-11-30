@@ -55,7 +55,7 @@ function adicionarSala() {
     resposta.then(resposta => {
 
         if (resposta.ok) {
-            fecharModal();
+            mensagem("success", "Sala cadastrada com sucesso!")
 
 
         } else if (resposta.status == 404) {

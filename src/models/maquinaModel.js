@@ -92,10 +92,19 @@ function buscarLimite(idNot, idTipoComp) {
     return database.executar(instrucao);
 }
 
-function notificar(captura, tipoDados, componente, maquina, tipoComponente, tipoNot) {
+function notificar(tipoAlerta, idMaquina) {
     var instrucao = `
-    INSERT INTO notificacao (data_hora, fk_idCaptura, fk_tipoDados, fk_componente, fk_maquina, fk_tipoComponente, fk_tipoNotificacao) 
-    VALUES (now(), ${captura}, ${tipoDados}, ${componente}, ${maquina}, ${tipoComponente}, ${tipoNot});
+     INSERT INTO alerta (data_hora, fk_tipoAlerta, fk_maquina) VALUES (now(), ${tipoAlerta}, ${idMaquina});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
+
+function verificarSeExisteAlerta(tipoAlerta, idMaquina) {
+    var instrucao = `
+    SELECT * FROM alerta WHERE fk_maquina = ${idMaquina} AND fk_tipoAlerta = ${tipoAlerta};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -105,11 +114,12 @@ function notificar(captura, tipoDados, componente, maquina, tipoComponente, tipo
 
 function graficoNotificacoes(){
     var instrucao = `
-    SELECT COUNT(*) as total, 
-    HOUR(data_hora) as hora, fk_tipoNotificacao as tipoNot
-    FROM notificacao 
-    GROUP BY hora, tipoNot , data_hora
-    ORDER BY data_hora
+    SELECT
+    HOUR(data_hora) as hora,
+    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 1 AND HOUR(data_hora) = hora) AS totalAviso,
+    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 2 AND HOUR(data_hora) = hora) AS totalUrgente
+    FROM alerta
+    GROUP BY hora
     LIMIT 10;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -153,8 +163,8 @@ function alterarMaquinaLigada(idMaquina, ligada){
     return database.executar(instrucao);
 }
 
-function buscarNotificacoes() {
-    var instrucao = `CALL procedures_not();`;
+function buscarNotificacoes(idEmpresa) {
+    var instrucao = `CALL procedures_not(${idEmpresa});`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -181,5 +191,6 @@ module.exports = {
     graficoSttMaquinas,
     alterarStatusMaquina,
     alterarMaquinaLigada,
-    buscarNotificacoes
+    buscarNotificacoes,
+    verificarSeExisteAlerta
 };

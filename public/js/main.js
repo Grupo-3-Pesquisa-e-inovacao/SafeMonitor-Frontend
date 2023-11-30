@@ -57,3 +57,35 @@ function mensagem(icone, mensagem){
   });
 }
 
+
+function generatePageButtons(itemsPerPage, data, buttons) {
+  var totalPages = Math.ceil(data.length / itemsPerPage);
+  var pageButtons = document.getElementById(`${buttons}`);
+  pageButtons.innerHTML = '';
+
+  for (var i = 1; i <= totalPages; i++) {
+    var button = document.createElement('button');
+    button.textContent = i;
+    button.addEventListener('click', function() {
+      var page = parseInt(this.textContent);
+      displayData(page);
+    });
+    pageButtons.appendChild(button);
+  }
+}
+
+
+function displayData(page, itemsPerPage, data, lista) {
+  var start = (page - 1) * itemsPerPage;
+  var end = start + itemsPerPage;
+  var displayedData = data.slice(start, end);
+
+  var dataList = document.getElementById(`${lista}`);
+  dataList.innerHTML = '';
+
+  displayedData.forEach(function(item) {
+    var li = document.createElement('li');
+    li.textContent = item.name;
+    dataList.appendChild(li);
+  });
+}
