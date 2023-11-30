@@ -7,7 +7,9 @@
     <title>Geral | Dashboard - SafeMonitor</title>
     <link rel="stylesheet" href="../../css/dashboard/header_footer.css">
     <link rel="stylesheet" href="../../css/dashboard/dashboard_geral.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../js/api/alerta.js"></script>
+    <script src="../../js/main.js"></script>
 
 </head>
 
@@ -39,7 +41,7 @@
     <div class="menu-mobile" id="menu-mobile">
         <ul class="icons">
             <li onclick="showHelp()">?</li>
-            <li><img src="../../assets/assets-dashboard/cog.png" alt=""><a href="configuracoes.html"></a></li>
+            <li><img src="../../assets/assets-dashboard/cog.png" alt=""><a href="./configuracoes.html"></a></li>
             <li><img src="../../assets/assets-dashboard/user.png" alt=""><a href="./perfil.html"></a></li>
         </ul>
         <a href="">Inicio</a>
@@ -97,27 +99,20 @@
                 </div>
                 <div class="alerta_notes">
                     <div class="titulo_alerta">Alertas</div>
-                    <div class="localizacao_alerta">
-                        <div id="nomeInfoAlerta">Alerta</div>
-                        <div id="nomeInfoID">| ID |</div>
-                        <div id="nomeInfoStatus"> Status</div>
-                    </div>
-                    <div class="alerta1">
-                        <img src="../../assets/assets-dashboard/dangerous.svg" alt="">
-                        <p>| 01324 | uso de CPU excedido</p>
-                    </div>
-                    <div class="alerta2">
-                        <img src="../../assets/assets-dashboard/dangerous.svg" alt="">
-                        <p>| 01349 | uso da Memoria excedido </p>
-                    </div>
-                    <div class="alerta3">
-                        <img src="../../assets/assets-dashboard/dangerous.svg" alt="">
-                        <p>| 01313 | uso de Disco excedido</p>
-                    </div>
-
-                    <!-- <div class="ver_outros">
-                        <img src="../../assets/left-arrow.svg" alt=""> <img src="../../assets/right-arrow.svg" alt="">
-                    </div> -->
+        
+                    <table>
+                        <thead>
+                          <tr id="titulo">
+                            <th>Alerta</th>
+                            <th>Máquina</th>
+                            <th>Sala</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody id="tabelaBody">
+                            
+                        </tbody>
+                      </table>
                 </div>
             </div>
             <div class="dashs2">
