@@ -3,7 +3,7 @@ var sql = require('mssql');
 
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
 var sqlServerConfig = {
-    server: "34.231.94.175",
+    server: "ec2-44-219-233-147.compute-1.amazonaws.com",
     database: "safe_monitor",
     user: "SafeMonitor",
     password: "Sptech123456",
