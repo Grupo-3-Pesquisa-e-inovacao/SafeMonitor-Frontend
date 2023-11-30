@@ -96,7 +96,7 @@ function cadastrarUsuario(email, senha, nome, cargo) {
             empresaServer: sessionStorage.ID_EMPRESA
         })
     }).then(function (resposta) {
-        console.log("ESTOU NO THEN DO cadastrarUsuario()!")
+        console.log("ESTOU NO THEN DO alterarUsuario()!")
         console.log("Resposta", resposta.status)
 
         if (resposta.ok) {
@@ -117,16 +117,12 @@ function cadastrarUsuario(email, senha, nome, cargo) {
     })
 }
 
-function alterarUsuarios(idUsuario){
+function alterarUsuario(idUsuario, email, senha, nome){
 
-    let emailVar = "teste@gmail.com";
-    let senhaVar = "12345";
-    let nomeVar = "testeSite";
-    let cargoVar = "Estagiário";
-    let cadastrarVar = 0;
-    let leituraVar = 1;
-    let alterarVar = 1;
-    let deletarVar = 0;
+    let idUsuarioVar = idUsuario 
+    let emailVar = email;
+    let senhaVar = senha;
+    let nomeVar = nome;
     
     fetch(`/usuarios/alterar/${idUsuario}`,{
         method: "PUT",
@@ -137,11 +133,7 @@ function alterarUsuarios(idUsuario){
             emailServer: emailVar,
             senhaServer: senhaVar,
             nomeServer: nomeVar,
-            cargoServer: cargoVar,
-            cadastrarServer: cadastrarVar,
-            leituraServer: leituraVar,
-            alterarServer: alterarVar,
-            deletarServer: deletarVar,
+            idUsuarioServer: idUsuarioVar
         })
     }).then(
         
@@ -170,7 +162,13 @@ async function listarUsuarios(){
             let lista = document.getElementById("user-list")
         
             
-            lista.innerHTML = ""
+            lista.innerHTML = `<li class="list-header">
+                                <p class="email">Email</p>
+                                <p class="data">Data</p>
+                                <p class="tipo">Tipo</p>
+                                <div class="edit" style="border: none;"></div>
+                                <div class="rmv" style="border: none;"></div>    
+                            </li>`
             let currentDate = new Date()
 
             for (let i = 0; i < dados.length; i++) {
@@ -179,11 +177,10 @@ async function listarUsuarios(){
                     <p class="email">${dados[i].email}</p>
                     <p class="data">${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}</p>
                     <p class="tipo">${dados[i].cargo}</p>
-                    <div class="edit">E</div>
-                    <div class="rmv">R</div>     
+                    <div class="edit" onclick="editarUsuario(${dados[i].idUsuario})">E</div>
+                    <div class="rmv" onclick="deletarUsuario(${dados[i].idUsuario})">R</div>     
                 </li>  
-        `
-                
+                `
             }
 
 
@@ -198,17 +195,22 @@ async function listarUsuarios(){
 
 }
 
-function deletarUsuarios(idUsuario){
+function deletarUsuario(idUsuario){
+    let idUsuarioVar = idUsuario
     
     fetch(`usuarios/deletar/${idUsuario}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
-        }
+        },
+        body: JSON.stringify({
+            idUsuarioServer: idUsuarioVar
+        })
     }).then(function (resposta) {
 
         if (resposta.ok) {
             window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+            listarUsuarios();
         } else if (resposta.status == 404) {
             window.alert("Deu 404!");
         } else {
