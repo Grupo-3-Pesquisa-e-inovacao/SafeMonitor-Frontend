@@ -10,7 +10,7 @@ function cadastrar(nome, modelo, numeroSerie, marca, idEmpresa, idSala) {
 }
 
 function listar(idSala) {
-    var instrucao = `CALL procedure_maquina(${idSala});`;
+    var instrucao = ` SELECT * FROM maquina WHERE fk_sala = ${idSala};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -22,20 +22,30 @@ function listarMaquinasEmpresa(idEmpresa) {
 }
 
 function capturaUltimoValor(idComponente, idTipoDados, idMaquina) {
-    var instrucao = `CALL ultimo_valor_captura(${idComponente}, ${idTipoDados}, ${idMaquina});`;
+    var instrucao = `
+    SELECT c.nome as componente, td.nome as dadoCapturado, dt_hora, valor_monitorado as valor   
+	FROM captura_dados  AS cd JOIN tipo_componente AS c ON c.idTipoComponente = cd.fk_componente
+	JOIN  tipo_dados AS td ON td.idTipoDados = cd.fk_tipoDados
+	WHERE fk_tipoComponente = ${idComponente} AND fk_maquina = ${idTipoDados} AND fk_tipoDados = ${idMaquina} ORDER BY dt_hora DESC 
+	LIMIT 1;
+    `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function graficosComponentes(idComponente, idMaquina, limite) {
-    var instrucao = `CALL graficos_especificos(${idComponente}, ${idMaquina}, ${limite});`;
+    var instrucao = `SELECT * FROM captura_dados 
+    WHERE fk_maquina = ${idMaquina} AND fk_tipoComponente = ${idComponente} 
+    ORDER BY dt_hora DESC 
+    OFFSET 0 ROWS
+    FETCH NEXT ${limite} ROWS ONLY;`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 
 function infoComponentes(idComponente, idMaquina) {
-    var instrucao = `CALL info_componente(${idComponente}, ${idMaquina});`;
+    var instrucao = `select * from componente WHERE fk_maquina = ${idMaquina} AND fk_tipoComponente = ${idComponente};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -81,20 +91,20 @@ function alterar(nome, modelo, numeroSerie, marca, idMaquina) {
 }
 
 function alterarLimite(limite, idNot, idTipoComp) {
-    var instrucao = `UPDATE limites SET limite = ${limite} WHERE fk_notificacao = ${idNot} AND fk_tipoComponente = ${idTipoComp};`;
+    var instrucao = `UPDATE limites SET limite = ${limite} WHERE fk_alerta = ${idNot} AND fk_tipoComponente = ${idTipoComp};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function buscarLimite(idNot, idTipoComp) {
-    var instrucao = `CALL info_limites(${idNot}, ${idTipoComp})`;
+    var instrucao = `SELECT limite FROM limites WHERE fk_alerta = ${idNot} AND fk_tipoComponente = ${idTipoComp};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function notificar(tipoAlerta, idMaquina) {
     var instrucao = `
-     INSERT INTO alerta (data_hora, fk_tipoAlerta, fk_maquina) VALUES (now(), ${tipoAlerta}, ${idMaquina});
+     INSERT INTO alerta (data_hora, fk_tipoAlerta, fk_maquina) VALUES (GETDATE(), ${tipoAlerta}, ${idMaquina});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -115,12 +125,15 @@ function verificarSeExisteAlerta(tipoAlerta, idMaquina) {
 function graficoNotificacoes(){
     var instrucao = `
     SELECT
-    HOUR(data_hora) as hora,
-    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 1 AND HOUR(data_hora) = hora) AS totalAviso,
-    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 2 AND HOUR(data_hora) = hora) AS totalUrgente
-    FROM alerta
-    GROUP BY hora
-    LIMIT 10;
+    DATEPART(HOUR, data_hora) AS hora,
+    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 1 AND DATEPART(HOUR, data_hora) = DATEPART(HOUR, a.data_hora)) AS totalAviso,
+    (SELECT COUNT(*) FROM alerta WHERE fk_tipoAlerta = 2 AND DATEPART(HOUR, data_hora) = DATEPART(HOUR, a.data_hora)) AS totalUrgente
+FROM alerta a
+GROUP BY DATEPART(HOUR, data_hora)
+ORDER BY DATEPART(HOUR, data_hora)
+OFFSET 0 ROWS
+FETCH NEXT 10 ROWS ONLY;
+
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -128,9 +141,11 @@ function graficoNotificacoes(){
 
 function graficoSttMaquinas(){
     var instrucao = `
-    SELECT count(*) as total, stt_maquina AS stt 
-    FROM maquina WHERE fk_empresa = 1 
-    GROUP BY stt;
+    SELECT COUNT(*) AS total, stt_maquina AS stt 
+FROM maquina 
+WHERE fk_empresa = 1 
+GROUP BY stt_maquina;
+    
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -164,7 +179,9 @@ function alterarMaquinaLigada(idMaquina, ligada){
 }
 
 function buscarNotificacoes(idEmpresa) {
-    var instrucao = `CALL procedures_not(${idEmpresa});`;
+    var instrucao = `SELECT m.stt_maquina as stt, m.nome as maquina, s.nome as sala, a.verificar as verificado FROM 
+    alerta AS a JOIN maquina AS m ON m.idMaquina = a.fk_maquina
+    JOIN sala_de_aula AS s ON m.fk_sala = s.idSala WHERE m.fk_empresa = 1;`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }

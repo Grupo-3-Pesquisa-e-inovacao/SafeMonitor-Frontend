@@ -10,6 +10,8 @@ async function buscarInfoMaquina(idMaquina){
     if (resposta.ok) {
         const dados = await resposta.json();
 
+        console.log(dados)
+
         document.getElementById("marca").innerHTML = dados.marca
         document.getElementById("modelo").innerHTML = dados.modelo
         document.getElementById("so").innerHTML = dados.sistema_operacional

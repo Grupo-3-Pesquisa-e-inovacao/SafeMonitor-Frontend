@@ -84,6 +84,7 @@ async function listarSala() {
         if (resposta.ok) {
             const dados = await resposta.json();
 
+
             for (var i = 0; i < dados.length; i++) {
 
                 try {
@@ -93,8 +94,6 @@ async function listarSala() {
                 } catch (erro) {
                     console.error('Erro na requisição:', erro);
                 }
-
-
 
                 var id = dados[i].idSala
                 var nome = dados[i].nome
@@ -108,8 +107,8 @@ async function listarSala() {
                 <div class="salas">
                     <a href="javascript:void(0);" onclick="computadoresSalas(${id})" >
                         <div class="icons-acoes">
-                            <button onclick="abrirModalEditar(${id}, '${nome}', '${localizacao}')"><i class="bi bi-pencil-square"></i><button>
-                            <button onclick="deletar(${id})"><i class="bi bi-trash3-fill"></i><button>
+                            <button class="button" onclick="abrirModalEditar(${id}, '${nome}', '${localizacao}')"><i class="bi bi-pencil-square"></i><button>
+                            <button class="button" onclick="deletar(${id})"><i class="bi bi-trash3-fill"></i><button>
                         </div>
 
                         <div class="nomeSala">${nome}</div>
@@ -121,15 +120,15 @@ async function listarSala() {
                                     ${localizacao}
                                 </div>
                                 <div class="tituloDados"><span style="font-weight: bold;">Total de dispositivos: 
-                                    ${dataQtdMaquina.totalMaquina}</span>
+                                    ${dataQtdMaquina[0].totalMaquina}</span>
                                 </div>
                                 
                                 <div class="tituloDados"><span style="font-weight: bold; color: green">Ligados: </span>
-                                    ${dataQtdMaquina.maquinasLigadas}
+                                    ${dataQtdMaquina[0].maquinasLigadas}
                                 </div>
                                 
                                 <div class="tituloDados"><span style="font-weight: bold; color: red">Desligados: </span>
-                                    ${dataQtdMaquina.maquinasDesligadas}
+                                    ${dataQtdMaquina[0].maquinasDesligadas}
                                 </div>
                             </div>  
                         </div>  

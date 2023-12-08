@@ -27,47 +27,6 @@ function abrirModalEditarMaquina(id, nome, modelo, marca, numero_serie) {
 
 
 
-function cadastrarMaquina() {
-
-    const rotaAPI = '/maquina/cadastrar';
-    const dados = {
-        nomeServer: document.getElementById("nome").value,
-        modeloServer: document.getElementById("modelo").value,
-        numeroSerieServer: document.getElementById("numeroSerie").value,
-        marcaServer: document.getElementById("marca").value,
-        idEmpresaServer: sessionStorage.ID_EMPRESA,
-        idSalaServer: sessionStorage.ID_SALA
-    };
-
-    const resposta = fetch(rotaAPI, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dados),
-    })
-
-    resposta.then(resposta => {
-        console.log('Resposta da API:', resposta);
-
-        if (resposta.ok) {
-            fecharModal();
-            window.alert("Máquina cadatrada")
-
-
-        } else if (resposta.status == 404) {
-            window.alert("Deu 404!");
-        } else {
-            throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-        }
-
-    }).catch(erro => {
-        console.error('Erro na requisição:', erro);
-    });
-
-
-}
-
 
 function computadoresSalas(idSala) {
     sessionStorage.ID_SALA = idSala;
@@ -116,14 +75,10 @@ async function listarMaquinaPorSala(idSala) {
                 capturaComponente(idMaquina, 1, 1, "cpu")
                 capturaComponente(idMaquina, 2, 1, "ram")
                 capturaComponente(idMaquina, 3, 1, "disco")
-                
-
-             
 
             
                 var sala = `
                 <div class="salas">
-                <a href="javascript:void(0);" onclick="computadoresEspecificos(${idMaquina})" >
                     <div class="icons-acoes">
                         <button onclick="abrirModalEditarMaquina(${idMaquina}, '${nome}', '${modelo}', '${marca}', '${numSerie}')"><i class="bi bi-pencil-square"></i><button>
                         <button onclick="deletarMaquina(${idMaquina})"><i class="bi bi-trash3-fill"></i><button>
@@ -158,8 +113,11 @@ async function listarMaquinaPorSala(idSala) {
                                 </div>
                             </div>
                         </div>
+                      
                     </div>
-                </a>
+
+                    <button class="button" onclick="computadoresEspecificos(${idMaquina})" >Visualizar</button>
+    
             </div>
         </div>`
 

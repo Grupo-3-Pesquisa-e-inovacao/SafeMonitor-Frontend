@@ -48,9 +48,9 @@ function listar(req, res) {
 
         if (resultado.length > 0) {
 
-            const maquina = resultado[0]
-            console.log("ENTRANDO NO CONTROLER");
-            console.log("estou", maquina);
+            const maquina = resultado
+            console.log("Listar máquinas");
+            console.log(maquina);
             res.json(maquina);
 
         } else {
@@ -117,7 +117,7 @@ function fecharJanela(req, res) {
     maquinaModel.fecharJanela(idJanela).then(function (resultado) {
 
         if (resultado.length > 0) {
-            const maquina = resultado[0]
+            const maquina = resultado
             console.log(maquina);
             res.json(maquina);
 
@@ -163,8 +163,8 @@ function buscarUltimoValor(req, res) {
 
         if (resultado.length > 0) {
 
-            const maquina = resultado[0]
-            console.log("ENTRANDO NO CONTROLER");
+            const maquina = resultado
+            console.log("último valor da captura");
             console.log("estou", maquina);
             res.json(maquina);
 
@@ -188,9 +188,9 @@ function graficosComponentes(req, res) {
 
         if (resultado.length > 0) {
 
-            const maquina = resultado[0]
-            console.log("ENTRANDO NO CONTROLER");
-            console.log("estou", maquina);
+            const maquina = resultado
+            console.log("Estado componente");
+            console.log(maquina);
             res.json(maquina);
 
         } else {
@@ -213,7 +213,7 @@ function infoComponentes(req, res) {
 
         if (resultado.length > 0) {
 
-            const maquina = resultado[0]
+            const maquina = resultado
             console.log("ENTRANDO NO CONTROLER");
             console.log("estou", maquina);
             res.json(maquina);
@@ -355,7 +355,7 @@ function buscarLimite(req, res) {
 
         if (resultado.length > 0) {
 
-            const maquina = resultado[0]
+            const maquina = resultado
             console.log("ENTRANDO NO CONTROLER");
             console.log("estou", maquina);
             res.json(maquina);
@@ -377,7 +377,7 @@ function graficoNotificacoes(req, res) {
 
         if (resultado.length > 0) {
             const maquina = resultado
-            console.log("ENTRANDO NO CONTROLER");
+            console.log("Gráfico notificações");
             console.log("estou", maquina);
             res.json(maquina);
 
@@ -484,7 +484,7 @@ function buscarNotificacoes(req, res) {
     maquinaModel.buscarNotificacoes(idEmpresa).then(function (resultado) {
 
         if (resultado.length > 0) {
-            const maquina = resultado[0]
+            const maquina = resultado
             console.log("ENTRANDO NO CONTROLER");
             console.log("estou", maquina);
             res.json(maquina);

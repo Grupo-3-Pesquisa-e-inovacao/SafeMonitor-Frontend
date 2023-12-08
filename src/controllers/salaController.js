@@ -71,9 +71,9 @@ function listar(req, res) {
 
         if (resultado.length > 0) {
 
-            const sala = resultado[0]
-            console.log("ENTRANDO NO CONTROLER");
-            console.log("estou", sala);
+            const sala = resultado
+            console.log("Listar salas");
+            console.log(sala);
             res.json(sala);
 
         } else {
@@ -95,9 +95,9 @@ function buscarInfoMaquinas(req, res) {
 
         if (resultado.length > 0) {
 
-            const sala = resultado[0][0]
-            console.log("ENTRANDO NO CONTROLER");
-            console.log("estou", sala);
+            const sala = resultado
+            console.log("Buscar info máquinas");
+            console.log( sala);
             res.json(sala);
 
         } else {

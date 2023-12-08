@@ -446,6 +446,9 @@ async function verificarDados() {
         try {
             // Requisição para a CPU
             var resposta = await fetch(`maquina/graficos/1/${id}/1`);
+            console.log(resposta)
+
+            
             var uso = await resposta.json();
 
 
@@ -652,10 +655,10 @@ function atualizarGraficos() {
     verificarDados()
     listarNotificacoes()
 
-    setTimeout(() => {  
-        atualizarGraficos()
+    // setTimeout(() => {  
+    //     atualizarGraficos()
 
-    }, 3000);
+    // }, 3000);
 }
 
 

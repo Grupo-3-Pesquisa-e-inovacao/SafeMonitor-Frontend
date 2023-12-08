@@ -14,7 +14,9 @@ var sqlServerConfig = {
         idleTimeoutMillis: 30000
     },
     options: {
-        encrypt: true, // for AWS
+        encrypt: false, // for AWS
+        trustServerCertificate: true
+
     }
 }
 
